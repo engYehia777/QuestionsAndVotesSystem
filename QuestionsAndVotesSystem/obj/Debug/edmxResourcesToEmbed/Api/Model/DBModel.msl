@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuestionsVotesModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="Answer_Types">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Answer_Types">
+        <MappingFragment StoreEntitySet="Answer_Types">
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Communities">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Community">
+        <MappingFragment StoreEntitySet="Communities">
+          <ScalarProperty Name="DescriptionAr" ColumnName="DescriptionAr" />
+          <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+          <ScalarProperty Name="DescriptionEn" ColumnName="DescriptionEn" />
+          <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryNameAR" ColumnName="CountryNameAR" />
+          <ScalarProperty Name="CountryNameEN" ColumnName="CountryNameEN" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="UTC_TimeZone_Operator" ColumnName="UTC_TimeZone_Operator" />
+          <ScalarProperty Name="UTC_TimeZone" ColumnName="UTC_TimeZone" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Currency">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="CurrencyNameEN" ColumnName="CurrencyNameEN" />
+          <ScalarProperty Name="ISO" ColumnName="ISO" />
+          <ScalarProperty Name="SymbolAR" ColumnName="SymbolAR" />
+          <ScalarProperty Name="SymbolEN" ColumnName="SymbolEN" />
+          <ScalarProperty Name="ShowEN" ColumnName="ShowEN" />
+          <ScalarProperty Name="SortEN" ColumnName="SortEN" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceTypes">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.DeviceType">
+        <MappingFragment StoreEntitySet="DeviceType">
+          <ScalarProperty Name="DeviceTypeID" ColumnName="DeviceTypeID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+          <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailingLists">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.MailingList">
+        <MappingFragment StoreEntitySet="MailingList">
+          <ScalarProperty Name="MailingID" ColumnName="MailingID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+          <ScalarProperty Name="DeviceTypeID_Add" ColumnName="DeviceTypeID_Add" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Remove" ColumnName="Remove" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Message">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="DeviceTypeID_Add" ColumnName="DeviceTypeID_Add" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="MessageSubject" ColumnName="MessageSubject" />
+          <ScalarProperty Name="MessageConent" ColumnName="MessageConent" />
+          <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Notification">
+        <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="TitleEN" ColumnName="TitleEN" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="DetailsEN" ColumnName="DetailsEN" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ItemTitle" ColumnName="ItemTitle" />
+          <ScalarProperty Name="IsSend" ColumnName="IsSend" />
+          <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationTypes">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.NotificationType">
+        <MappingFragment StoreEntitySet="NotificationType">
+          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Page">
+        <MappingFragment StoreEntitySet="Pages">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+          <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icone" ColumnName="Icone" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Post_Info">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Post_Info">
+        <MappingFragment StoreEntitySet="Post_Info">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Question_Answer_Values">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Question_Answer_Values">
+        <MappingFragment StoreEntitySet="Question_Answer_Values">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="OptionNum" ColumnName="OptionNum" />
+          <ScalarProperty Name="AnswerValue" ColumnName="AnswerValue" />
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+          <ScalarProperty Name="NumOfSelectedAnswers" ColumnName="NumOfSelectedAnswers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Question">
+        <MappingFragment StoreEntitySet="Questions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PostId" ColumnName="PostId" />
+          <ScalarProperty Name="AnswerTypeId" ColumnName="AnswerTypeId" />
+          <ScalarProperty Name="QuesetionTitle" ColumnName="QuesetionTitle" />
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+          <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="IsRankeditorChoice" ColumnName="IsRankeditorChoice" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TotalAnswers" ColumnName="TotalAnswers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions_Comunities">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Questions_Comunities">
+        <MappingFragment StoreEntitySet="Questions_Comunities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="ComunitieId" ColumnName="ComunitieId" />
+          <ScalarProperty Name="AddingDate" ColumnName="AddingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roleprimissions">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.Roleprimission">
+        <MappingFragment StoreEntitySet="Roleprimissions">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="PageID" ColumnName="PageID" />
+          <ScalarProperty Name="CanADD" ColumnName="CanADD" />
+          <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+          <ScalarProperty Name="CanShow" ColumnName="CanShow" />
+          <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+          <ScalarProperty Name="CanSearch" ColumnName="CanSearch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SiteManagements">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.SiteManagement">
+        <MappingFragment StoreEntitySet="SiteManagement">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PageNameAR" ColumnName="PageNameAR" />
+          <ScalarProperty Name="PageNameEN" ColumnName="PageNameEN" />
+          <ScalarProperty Name="TitleAR" ColumnName="TitleAR" />
+          <ScalarProperty Name="TitleEN" ColumnName="TitleEN" />
+          <ScalarProperty Name="URLTitleAR" ColumnName="URLTitleAR" />
+          <ScalarProperty Name="URLTitleEN" ColumnName="URLTitleEN" />
+          <ScalarProperty Name="SubTitleAR" ColumnName="SubTitleAR" />
+          <ScalarProperty Name="SubTitleEN" ColumnName="SubTitleEN" />
+          <ScalarProperty Name="DetailsAR" ColumnName="DetailsAR" />
+          <ScalarProperty Name="DetailsEN" ColumnName="DetailsEN" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="PhotoCover" ColumnName="PhotoCover" />
+          <ScalarProperty Name="PhotoAltAR" ColumnName="PhotoAltAR" />
+          <ScalarProperty Name="PhotoAltEN" ColumnName="PhotoAltEN" />
+          <ScalarProperty Name="BrowserTitleAR" ColumnName="BrowserTitleAR" />
+          <ScalarProperty Name="BrowserTitleEN" ColumnName="BrowserTitleEN" />
+          <ScalarProperty Name="Routing" ColumnName="Routing" />
+          <ScalarProperty Name="MetaDescriptionAR" ColumnName="MetaDescriptionAR" />
+          <ScalarProperty Name="MetaDescriptionEN" ColumnName="MetaDescriptionEN" />
+          <ScalarProperty Name="MetaKeywordsAR" ColumnName="MetaKeywordsAR" />
+          <ScalarProperty Name="MetaKeywordsEN" ColumnName="MetaKeywordsEN" />
+          <ScalarProperty Name="ViewsAR" ColumnName="ViewsAR" />
+          <ScalarProperty Name="ViewsEN" ColumnName="ViewsEN" />
+          <ScalarProperty Name="SortAR" ColumnName="SortAR" />
+          <ScalarProperty Name="SortEN" ColumnName="SortEN" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+          <ScalarProperty Name="SiteManagementTypeID" ColumnName="SiteManagementTypeID" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SiteManagementSections">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.SiteManagementSection">
+        <MappingFragment StoreEntitySet="SiteManagementSection">
+          <ScalarProperty Name="SiteManagementSectionID" ColumnName="SiteManagementSectionID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="PhotoAltAR" ColumnName="PhotoAltAR" />
+          <ScalarProperty Name="PhotoAltEN" ColumnName="PhotoAltEN" />
+          <ScalarProperty Name="TitleEN" ColumnName="TitleEN" />
+          <ScalarProperty Name="TitleAR" ColumnName="TitleAR" />
+          <ScalarProperty Name="SubTitleAR" ColumnName="SubTitleAR" />
+          <ScalarProperty Name="SubTitleEN" ColumnName="SubTitleEN" />
+          <ScalarProperty Name="ShowEN" ColumnName="ShowEN" />
+          <ScalarProperty Name="ShowAR" ColumnName="ShowAR" />
+          <ScalarProperty Name="URLEN" ColumnName="URLEN" />
+          <ScalarProperty Name="URLAR" ColumnName="URLAR" />
+          <ScalarProperty Name="URLTitleAR" ColumnName="URLTitleAR" />
+          <ScalarProperty Name="URLTitleEN" ColumnName="URLTitleEN" />
+          <ScalarProperty Name="SummaryAR" ColumnName="SummaryAR" />
+          <ScalarProperty Name="SummaryEN" ColumnName="SummaryEN" />
+          <ScalarProperty Name="DetailsEN" ColumnName="DetailsEN" />
+          <ScalarProperty Name="DetailsAR" ColumnName="DetailsAR" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+          <ScalarProperty Name="SortAR" ColumnName="SortAR" />
+          <ScalarProperty Name="SortEN" ColumnName="SortEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SiteManagementTypes">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.SiteManagementType">
+        <MappingFragment StoreEntitySet="SiteManagementType">
+          <ScalarProperty Name="SiteManagementTypeID" ColumnName="SiteManagementTypeID" />
+          <ScalarProperty Name="TitleAR" ColumnName="TitleAR" />
+          <ScalarProperty Name="TitleEN" ColumnName="TitleEN" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+          <ScalarProperty Name="Routing" ColumnName="Routing" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SocialNetworks">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.SocialNetwork">
+        <MappingFragment StoreEntitySet="SocialNetwork">
+          <ScalarProperty Name="SocialNetworkID" ColumnName="SocialNetworkID" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameEN" ColumnName="NameEN" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="BgColor" ColumnName="BgColor" />
+          <ScalarProperty Name="BgColorHover" ColumnName="BgColorHover" />
+          <ScalarProperty Name="IconColor" ColumnName="IconColor" />
+          <ScalarProperty Name="IconColorHover" ColumnName="IconColorHover" />
+          <ScalarProperty Name="ShowAR" ColumnName="ShowAR" />
+          <ScalarProperty Name="ShowEN" ColumnName="ShowEN" />
+          <ScalarProperty Name="SortAR" ColumnName="SortAR" />
+          <ScalarProperty Name="SortEN" ColumnName="SortEN" />
+          <ScalarProperty Name="URLTitleAR" ColumnName="URLTitleAR" />
+          <ScalarProperty Name="URLTitleEN" ColumnName="URLTitleEN" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UploadFiles">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.UploadFile">
+        <MappingFragment StoreEntitySet="UploadFiles">
+          <ScalarProperty Name="UploadID" ColumnName="UploadID" />
+          <ScalarProperty Name="Upload" ColumnName="Upload" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Answers">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.User_Answers">
+        <MappingFragment StoreEntitySet="User_Answers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="SelectedAnswerIds" ColumnName="SelectedAnswerIds" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Communities">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.User_Communities">
+        <MappingFragment StoreEntitySet="User_Communities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CommunitieId" ColumnName="CommunitieId" />
+          <ScalarProperty Name="FollowingDate" ColumnName="FollowingDate" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteInfoes">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.WebsiteInfo">
+        <MappingFragment StoreEntitySet="WebsiteInfo">
+          <ScalarProperty Name="WebsiteInfoID" ColumnName="WebsiteInfoID" />
+          <ScalarProperty Name="WebsiteNameEN" ColumnName="WebsiteNameEN" />
+          <ScalarProperty Name="WebsiteNameAR" ColumnName="WebsiteNameAR" />
+          <ScalarProperty Name="AddressEN" ColumnName="AddressEN" />
+          <ScalarProperty Name="AddressAR" ColumnName="AddressAR" />
+          <ScalarProperty Name="Hotline" ColumnName="Hotline" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="WorkTimeAR" ColumnName="WorkTimeAR" />
+          <ScalarProperty Name="WorkTimeEN" ColumnName="WorkTimeEN" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="ConactEmail" ColumnName="ConactEmail" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="LogoFooter" ColumnName="LogoFooter" />
+          <ScalarProperty Name="Map" ColumnName="Map" />
+          <ScalarProperty Name="SeoScript" ColumnName="SeoScript" />
+          <ScalarProperty Name="FacebookPage" ColumnName="FacebookPage" />
+          <ScalarProperty Name="SloganAR" ColumnName="SloganAR" />
+          <ScalarProperty Name="SloganEN" ColumnName="SloganEN" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteInfoEmailSettings">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.WebsiteInfoEmailSetting">
+        <MappingFragment StoreEntitySet="WebsiteInfoEmailSetting">
+          <ScalarProperty Name="WebsiteInfoEmailSettingID" ColumnName="WebsiteInfoEmailSettingID" />
+          <ScalarProperty Name="WebsiteInfoID" ColumnName="WebsiteInfoID" />
+          <ScalarProperty Name="WebsiteInfoEmailSettingTypeID" ColumnName="WebsiteInfoEmailSettingTypeID" />
+          <ScalarProperty Name="TitleDevelopment" ColumnName="TitleDevelopment" />
+          <ScalarProperty Name="Sender_Email" ColumnName="Sender_Email" />
+          <ScalarProperty Name="Sender_EmailName" ColumnName="Sender_EmailName" />
+          <ScalarProperty Name="Sender_EmailNameEN" ColumnName="Sender_EmailNameEN" />
+          <ScalarProperty Name="BCC_Emails" ColumnName="BCC_Emails" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="SubjectEN" ColumnName="SubjectEN" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="TitleEN" ColumnName="TitleEN" />
+          <ScalarProperty Name="EmailFileName" ColumnName="EmailFileName" />
+          <ScalarProperty Name="EmailFileNameEN" ColumnName="EmailFileNameEN" />
+          <ScalarProperty Name="MessageSuccess" ColumnName="MessageSuccess" />
+          <ScalarProperty Name="MessageSuccessEN" ColumnName="MessageSuccessEN" />
+          <ScalarProperty Name="MessageFailed" ColumnName="MessageFailed" />
+          <ScalarProperty Name="MessageFailedEN" ColumnName="MessageFailedEN" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteInfoEmailSettingTypes">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.WebsiteInfoEmailSettingType">
+        <MappingFragment StoreEntitySet="WebsiteInfoEmailSettingType">
+          <ScalarProperty Name="WebsiteInfoEmailSettingTypeID" ColumnName="WebsiteInfoEmailSettingTypeID" />
+          <ScalarProperty Name="TitleDevelopment" ColumnName="TitleDevelopment" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteInfoSmsAndNotifications">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.WebsiteInfoSmsAndNotification">
+        <MappingFragment StoreEntitySet="WebsiteInfoSmsAndNotification">
+          <ScalarProperty Name="WebsiteInfoSmsID" ColumnName="WebsiteInfoSmsID" />
+          <ScalarProperty Name="WebsiteInfoID" ColumnName="WebsiteInfoID" />
+          <ScalarProperty Name="WebsiteInfoSmsStatusID" ColumnName="WebsiteInfoSmsStatusID" />
+          <ScalarProperty Name="MessageTextAR" ColumnName="MessageTextAR" />
+          <ScalarProperty Name="MessageTextEN" ColumnName="MessageTextEN" />
+          <ScalarProperty Name="NotificationTitle" ColumnName="NotificationTitle" />
+          <ScalarProperty Name="NotificationTitleEN" ColumnName="NotificationTitleEN" />
+          <ScalarProperty Name="NotificationDetails" ColumnName="NotificationDetails" />
+          <ScalarProperty Name="NotificationDetailsEN" ColumnName="NotificationDetailsEN" />
+          <ScalarProperty Name="NotificationPhoto" ColumnName="NotificationPhoto" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebsiteInfoSmsAndNotificationStatus">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.WebsiteInfoSmsAndNotificationStatu">
+        <MappingFragment StoreEntitySet="WebsiteInfoSmsAndNotificationStatus">
+          <ScalarProperty Name="WebsiteInfoSmsStatusID" ColumnName="WebsiteInfoSmsStatusID" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="StateEN" ColumnName="StateEN" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="ShowSMS" ColumnName="ShowSMS" />
+          <ScalarProperty Name="ShowNotification" ColumnName="ShowNotification" />
+          <ScalarProperty Name="UserID_Add" ColumnName="UserID_Add" />
+          <ScalarProperty Name="Date_Add" ColumnName="Date_Add" />
+          <ScalarProperty Name="UserID_Edit" ColumnName="UserID_Edit" />
+          <ScalarProperty Name="Date_Edit" ColumnName="Date_Edit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionName="QuestionsVotesModel.Store.Split" FunctionImportName="Split">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QuestionsVotesModel.Split_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="val" ColumnName="val" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UserSecurityPages" FunctionName="QuestionsVotesModel.Store.UserSecurityPages">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QuestionsVotesModel.UserSecurityPages_Result">
+          <ScalarProperty Name="CanADD" ColumnName="CanADD" />
+          <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+          <ScalarProperty Name="CanShow" ColumnName="CanShow" />
+          <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+          <ScalarProperty Name="CanSearch" ColumnName="CanSearch" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="QuestionsVotesModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="QuestionsVotesModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="UserPages" FunctionName="QuestionsVotesModel.Store.UserPages">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QuestionsVotesModel.UserPages_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+          <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Icone" ColumnName="Icone" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

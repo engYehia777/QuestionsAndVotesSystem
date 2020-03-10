@@ -1,0 +1,13 @@
+﻿
+@using QuestionsAndVotesSystem.Areas.Profile.Helper;
+@using QuestionsAndVotesSystem.Api.Model
+@model QuestionsAndVotesSystem.Api.Model.Links
+<hr />
+@if (Session["CanADD"] != null)
+{
+
+    if (Session["CanADD"].Equals(true))
+    {
+        @Html.Raw(@Html.Links("_self", "", "Creat New", @Model.Action, 1));
+    }
+}

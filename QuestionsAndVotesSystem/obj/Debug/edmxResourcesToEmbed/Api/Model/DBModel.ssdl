@@ -1,0 +1,1006 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuestionsVotesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Answer_Types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NameEn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NameAr" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="RegistrationDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="PhotoUrl" Type="nvarchar(max)" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Gender" Type="nchar" MaxLength="10" />
+    <Property Name="Points" Type="int" />
+  </EntityType>
+  <EntityType Name="Communities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameEn" Type="nvarchar" MaxLength="50" />
+    <Property Name="DescriptionEn" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NameAr" Type="nvarchar" MaxLength="50" />
+    <Property Name="DescriptionAr" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryNameAR" Type="nvarchar(max)" />
+    <Property Name="CountryNameEN" Type="nvarchar(max)" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="UTC_TimeZone_Operator" Type="char" MaxLength="1" />
+    <Property Name="UTC_TimeZone" Type="time" Precision="7" />
+    <Property Name="IsDefault" Type="bit" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyID" />
+    </Key>
+    <Property Name="CurrencyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CurrencyName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="CurrencyNameEN" Type="nvarchar" MaxLength="100" />
+    <Property Name="ISO" Type="nvarchar" MaxLength="100" />
+    <Property Name="SymbolAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="SymbolEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShowEN" Type="bit" />
+    <Property Name="SortEN" Type="int" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DeviceType">
+    <Key>
+      <PropertyRef Name="DeviceTypeID" />
+    </Key>
+    <Property Name="DeviceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="IsDefault" Type="bit" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="MailingList">
+    <Key>
+      <PropertyRef Name="MailingID" />
+    </Key>
+    <Property Name="MailingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="LanguageID" Type="int" />
+    <Property Name="DeviceTypeID_Add" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Remove" Type="bit" />
+    <Property Name="RegisterDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="int" />
+    <Property Name="DeviceTypeID_Add" Type="int" />
+    <Property Name="FullName" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="100" />
+    <Property Name="MessageSubject" Type="nvarchar" MaxLength="500" />
+    <Property Name="MessageConent" Type="nvarchar(max)" />
+    <Property Name="MessageDate" Type="datetime" />
+    <Property Name="Language" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryID" Type="int" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="TitleEN" Type="nvarchar(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="DetailsEN" Type="nvarchar(max)" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="NotificationTypeID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="ItemTitle" Type="nvarchar(max)" />
+    <Property Name="IsSend" Type="bit" />
+    <Property Name="SendDate" Type="datetime" />
+    <Property Name="Views" Type="bigint" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="NotificationType">
+    <Key>
+      <PropertyRef Name="NotificationTypeID" />
+    </Key>
+    <Property Name="NotificationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="ApiKey" Type="nvarchar" MaxLength="50" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Pages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ControlName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ToolTip" Type="nvarchar(max)" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+    <Property Name="URL" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Icone" Type="nvarchar" MaxLength="500" />
+    <Property Name="ParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Post_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="LanguageId" Type="int" />
+  </EntityType>
+  <EntityType Name="Question_Answer_Values">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="OptionNum" Type="int" Nullable="false" />
+    <Property Name="AnswerValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhotoUrl" Type="nvarchar(max)" />
+    <Property Name="NumOfSelectedAnswers" Type="int" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostId" Type="int" Nullable="false" />
+    <Property Name="AnswerTypeId" Type="int" Nullable="false" />
+    <Property Name="QuesetionTitle" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhotoUrl" Type="nvarchar(max)" />
+    <Property Name="IsRequired" Type="bit" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IsRankeditorChoice" Type="bit" />
+    <Property Name="Points" Type="int" />
+    <Property Name="TotalAnswers" Type="int" />
+  </EntityType>
+  <EntityType Name="Questions_Comunities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="ComunitieId" Type="int" Nullable="false" />
+    <Property Name="AddingDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Roleprimissions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PageID" Type="int" Nullable="false" />
+    <Property Name="CanADD" Type="bit" Nullable="false" />
+    <Property Name="CanUpdate" Type="bit" Nullable="false" />
+    <Property Name="CanShow" Type="bit" Nullable="false" />
+    <Property Name="CanDelete" Type="bit" Nullable="false" />
+    <Property Name="CanSearch" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SiteManagement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageNameAR" Type="nvarchar" MaxLength="50" />
+    <Property Name="PageNameEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="TitleAR" Type="nvarchar(max)" />
+    <Property Name="TitleEN" Type="nvarchar(max)" />
+    <Property Name="URLTitleAR" Type="nvarchar" MaxLength="200" />
+    <Property Name="URLTitleEN" Type="nvarchar" MaxLength="200" />
+    <Property Name="SubTitleAR" Type="nvarchar(max)" />
+    <Property Name="SubTitleEN" Type="nvarchar(max)" />
+    <Property Name="DetailsAR" Type="nvarchar(max)" />
+    <Property Name="DetailsEN" Type="nvarchar(max)" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhotoCover" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhotoAltAR" Type="nvarchar(max)" />
+    <Property Name="PhotoAltEN" Type="nvarchar(max)" />
+    <Property Name="BrowserTitleAR" Type="nvarchar" MaxLength="600" />
+    <Property Name="BrowserTitleEN" Type="nvarchar" MaxLength="600" />
+    <Property Name="Routing" Type="nvarchar" MaxLength="600" />
+    <Property Name="MetaDescriptionAR" Type="nvarchar" MaxLength="600" />
+    <Property Name="MetaDescriptionEN" Type="nvarchar" MaxLength="600" />
+    <Property Name="MetaKeywordsAR" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MetaKeywordsEN" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ViewsAR" Type="int" />
+    <Property Name="ViewsEN" Type="int" />
+    <Property Name="SortAR" Type="int" />
+    <Property Name="SortEN" Type="int" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="MenuID" Type="int" />
+    <Property Name="SiteManagementTypeID" Type="int" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SiteManagementSection">
+    <Key>
+      <PropertyRef Name="SiteManagementSectionID" />
+    </Key>
+    <Property Name="SiteManagementSectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="PhotoAltAR" Type="nvarchar(max)" />
+    <Property Name="PhotoAltEN" Type="nvarchar(max)" />
+    <Property Name="TitleEN" Type="nvarchar(max)" />
+    <Property Name="TitleAR" Type="nvarchar(max)" />
+    <Property Name="SubTitleAR" Type="nvarchar(max)" />
+    <Property Name="SubTitleEN" Type="nvarchar(max)" />
+    <Property Name="ShowEN" Type="bit" />
+    <Property Name="ShowAR" Type="bit" />
+    <Property Name="URLEN" Type="nvarchar" MaxLength="300" />
+    <Property Name="URLAR" Type="nvarchar" MaxLength="300" />
+    <Property Name="URLTitleAR" Type="nvarchar" MaxLength="300" />
+    <Property Name="URLTitleEN" Type="nvarchar" MaxLength="300" />
+    <Property Name="SummaryAR" Type="nvarchar(max)" />
+    <Property Name="SummaryEN" Type="nvarchar(max)" />
+    <Property Name="DetailsEN" Type="nvarchar(max)" />
+    <Property Name="DetailsAR" Type="nvarchar(max)" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+    <Property Name="SortAR" Type="int" />
+    <Property Name="SortEN" Type="int" />
+  </EntityType>
+  <EntityType Name="SiteManagementType">
+    <Key>
+      <PropertyRef Name="SiteManagementTypeID" />
+    </Key>
+    <Property Name="SiteManagementTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleAR" Type="nvarchar(max)" />
+    <Property Name="TitleEN" Type="nvarchar(max)" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+    <Property Name="Routing" Type="nvarchar" MaxLength="600" />
+  </EntityType>
+  <EntityType Name="SocialNetwork">
+    <Key>
+      <PropertyRef Name="SocialNetworkID" />
+    </Key>
+    <Property Name="SocialNetworkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URL" Type="nvarchar" MaxLength="300" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="NameEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="BgColor" Type="nvarchar" MaxLength="50" />
+    <Property Name="BgColorHover" Type="nvarchar" MaxLength="50" />
+    <Property Name="IconColor" Type="nvarchar" MaxLength="50" />
+    <Property Name="IconColorHover" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShowAR" Type="bit" />
+    <Property Name="ShowEN" Type="bit" />
+    <Property Name="SortAR" Type="int" />
+    <Property Name="SortEN" Type="int" />
+    <Property Name="URLTitleAR" Type="nvarchar(max)" />
+    <Property Name="URLTitleEN" Type="nvarchar(max)" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UploadFiles">
+    <Key>
+      <PropertyRef Name="UploadID" />
+    </Key>
+    <Property Name="UploadID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Upload" Type="nvarchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" />
+    <Property Name="UploadDate" Type="datetime" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="User_Answers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
+    <Property Name="SelectedAnswerIds" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Communities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CommunitieId" Type="int" Nullable="false" />
+    <Property Name="FollowingDate" Type="datetime" />
+    <Property Name="Sort" Type="int" />
+  </EntityType>
+  <EntityType Name="WebsiteInfo">
+    <Key>
+      <PropertyRef Name="WebsiteInfoID" />
+    </Key>
+    <Property Name="WebsiteInfoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebsiteNameEN" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="WebsiteNameAR" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="AddressEN" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddressAR" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Hotline" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkTimeAR" Type="nvarchar(max)" />
+    <Property Name="WorkTimeEN" Type="nvarchar(max)" />
+    <Property Name="Domain" Type="nvarchar" MaxLength="500" />
+    <Property Name="ConactEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="500" />
+    <Property Name="LogoFooter" Type="nvarchar" MaxLength="500" />
+    <Property Name="Map" Type="nvarchar(max)" />
+    <Property Name="SeoScript" Type="nvarchar(max)" />
+    <Property Name="FacebookPage" Type="nvarchar(max)" />
+    <Property Name="SloganAR" Type="nvarchar" MaxLength="500" />
+    <Property Name="SloganEN" Type="nvarchar" MaxLength="500" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WebsiteInfoEmailSetting">
+    <Key>
+      <PropertyRef Name="WebsiteInfoEmailSettingID" />
+    </Key>
+    <Property Name="WebsiteInfoEmailSettingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebsiteInfoID" Type="int" />
+    <Property Name="WebsiteInfoEmailSettingTypeID" Type="int" />
+    <Property Name="TitleDevelopment" Type="nvarchar(max)" />
+    <Property Name="Sender_Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sender_EmailName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sender_EmailNameEN" Type="nvarchar" MaxLength="100" />
+    <Property Name="BCC_Emails" Type="nvarchar(max)" />
+    <Property Name="Subject" Type="nvarchar(max)" />
+    <Property Name="SubjectEN" Type="nvarchar(max)" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="TitleEN" Type="nvarchar(max)" />
+    <Property Name="EmailFileName" Type="nvarchar(max)" />
+    <Property Name="EmailFileNameEN" Type="nvarchar(max)" />
+    <Property Name="MessageSuccess" Type="nvarchar(max)" />
+    <Property Name="MessageSuccessEN" Type="nvarchar(max)" />
+    <Property Name="MessageFailed" Type="nvarchar(max)" />
+    <Property Name="MessageFailedEN" Type="nvarchar(max)" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WebsiteInfoEmailSettingType">
+    <Key>
+      <PropertyRef Name="WebsiteInfoEmailSettingTypeID" />
+    </Key>
+    <Property Name="WebsiteInfoEmailSettingTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleDevelopment" Type="nvarchar(max)" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WebsiteInfoSmsAndNotification">
+    <Key>
+      <PropertyRef Name="WebsiteInfoSmsID" />
+    </Key>
+    <Property Name="WebsiteInfoSmsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebsiteInfoID" Type="int" Nullable="false" />
+    <Property Name="WebsiteInfoSmsStatusID" Type="int" Nullable="false" />
+    <Property Name="MessageTextAR" Type="nvarchar(max)" />
+    <Property Name="MessageTextEN" Type="nvarchar(max)" />
+    <Property Name="NotificationTitle" Type="nvarchar(max)" />
+    <Property Name="NotificationTitleEN" Type="nvarchar(max)" />
+    <Property Name="NotificationDetails" Type="nvarchar(max)" />
+    <Property Name="NotificationDetailsEN" Type="nvarchar(max)" />
+    <Property Name="NotificationPhoto" Type="nvarchar(max)" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WebsiteInfoSmsAndNotificationStatus">
+    <Key>
+      <PropertyRef Name="WebsiteInfoSmsStatusID" />
+    </Key>
+    <Property Name="WebsiteInfoSmsStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" />
+    <Property Name="StateEN" Type="nvarchar(max)" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="ShowSMS" Type="bit" />
+    <Property Name="ShowNotification" Type="bit" />
+    <Property Name="UserID_Add" Type="int" />
+    <Property Name="Date_Add" Type="datetime" />
+    <Property Name="UserID_Edit" Type="int" />
+    <Property Name="Date_Edit" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Currency_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="Currency" Type="Self.Currency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Currency">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailingList_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="MailingList" Type="Self.MailingList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="MailingList">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailingList_DeviceType_Add">
+    <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
+    <End Role="MailingList" Type="Self.MailingList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceType">
+        <PropertyRef Name="DeviceTypeID" />
+      </Principal>
+      <Dependent Role="MailingList">
+        <PropertyRef Name="DeviceTypeID_Add" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailingList_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+    <End Role="MailingList" Type="Self.MailingList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageID" />
+      </Principal>
+      <Dependent Role="MailingList">
+        <PropertyRef Name="LanguageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Messages_DeviceType_Add">
+    <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeviceType">
+        <PropertyRef Name="DeviceTypeID" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="DeviceTypeID_Add" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_Info_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Post_Info" Type="Self.Post_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post_Info">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_Answer_Values_Questions">
+    <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+    <End Role="Question_Answer_Values" Type="Self.Question_Answer_Values" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question_Answer_Values">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Answer_Types">
+    <End Role="Answer_Types" Type="Self.Answer_Types" Multiplicity="1" />
+    <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Answer_Types">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="AnswerTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Comunities_Communities">
+    <End Role="Communities" Type="Self.Communities" Multiplicity="1" />
+    <End Role="Questions_Comunities" Type="Self.Questions_Comunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Communities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions_Comunities">
+        <PropertyRef Name="ComunitieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Comunities_Questions">
+    <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+    <End Role="Questions_Comunities" Type="Self.Questions_Comunities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions_Comunities">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_Post_Info">
+    <End Role="Post_Info" Type="Self.Post_Info" Multiplicity="1" />
+    <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post_Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Roleprimission_AspNetRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+    <End Role="Roleprimissions" Type="Self.Roleprimissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Roleprimissions">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Roleprimission_Pages">
+    <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+    <End Role="Roleprimissions" Type="Self.Roleprimissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pages">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Roleprimissions">
+        <PropertyRef Name="PageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiteManagementSection_SiteManagement">
+    <End Role="SiteManagement" Type="Self.SiteManagement" Multiplicity="1" />
+    <End Role="SiteManagementSection" Type="Self.SiteManagementSection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SiteManagement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SiteManagementSection">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Answers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_Answers" Type="Self.User_Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Answers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Answers_Questions">
+    <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+    <End Role="User_Answers" Type="Self.User_Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Answers">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Communities_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_Communities" Type="Self.User_Communities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Communities">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Communities_Communities">
+    <End Role="Communities" Type="Self.Communities" Multiplicity="1" />
+    <End Role="User_Communities" Type="Self.User_Communities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Communities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Communities">
+        <PropertyRef Name="CommunitieId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebsiteInfoEmailSetting_WebsiteInfo">
+    <End Role="WebsiteInfo" Type="Self.WebsiteInfo" Multiplicity="0..1" />
+    <End Role="WebsiteInfoEmailSetting" Type="Self.WebsiteInfoEmailSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebsiteInfo">
+        <PropertyRef Name="WebsiteInfoID" />
+      </Principal>
+      <Dependent Role="WebsiteInfoEmailSetting">
+        <PropertyRef Name="WebsiteInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebsiteInfoEmailSetting_WebsiteInfoEmailSettingTypeID">
+    <End Role="WebsiteInfoEmailSettingType" Type="Self.WebsiteInfoEmailSettingType" Multiplicity="0..1" />
+    <End Role="WebsiteInfoEmailSetting" Type="Self.WebsiteInfoEmailSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebsiteInfoEmailSettingType">
+        <PropertyRef Name="WebsiteInfoEmailSettingTypeID" />
+      </Principal>
+      <Dependent Role="WebsiteInfoEmailSetting">
+        <PropertyRef Name="WebsiteInfoEmailSettingTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebsiteInfoSmsAndNotification_WebsiteInfo">
+    <End Role="WebsiteInfo" Type="Self.WebsiteInfo" Multiplicity="1" />
+    <End Role="WebsiteInfoSmsAndNotification" Type="Self.WebsiteInfoSmsAndNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebsiteInfo">
+        <PropertyRef Name="WebsiteInfoID" />
+      </Principal>
+      <Dependent Role="WebsiteInfoSmsAndNotification">
+        <PropertyRef Name="WebsiteInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebsiteInfoSmsAndNotification_WebsiteInfoSmsAndNotificationStatus">
+    <End Role="WebsiteInfoSmsAndNotificationStatus" Type="Self.WebsiteInfoSmsAndNotificationStatus" Multiplicity="1" />
+    <End Role="WebsiteInfoSmsAndNotification" Type="Self.WebsiteInfoSmsAndNotification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebsiteInfoSmsAndNotificationStatus">
+        <PropertyRef Name="WebsiteInfoSmsStatusID" />
+      </Principal>
+      <Dependent Role="WebsiteInfoSmsAndNotification">
+        <PropertyRef Name="WebsiteInfoSmsStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="delimited" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="delimiter" Type="nvarchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="val" Type="nvarchar(max)" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="UserPages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UserSecurityPages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+    <Parameter Name="PageName" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="QuestionsVotesModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Answer_Types" EntityType="Self.Answer_Types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Communities" EntityType="Self.Communities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeviceType" EntityType="Self.DeviceType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MailingList" EntityType="Self.MailingList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationType" EntityType="Self.NotificationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Post_Info" EntityType="Self.Post_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Question_Answer_Values" EntityType="Self.Question_Answer_Values" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questions_Comunities" EntityType="Self.Questions_Comunities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roleprimissions" EntityType="Self.Roleprimissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiteManagement" EntityType="Self.SiteManagement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiteManagementSection" EntityType="Self.SiteManagementSection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SiteManagementType" EntityType="Self.SiteManagementType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SocialNetwork" EntityType="Self.SocialNetwork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UploadFiles" EntityType="Self.UploadFiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Answers" EntityType="Self.User_Answers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Communities" EntityType="Self.User_Communities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteInfo" EntityType="Self.WebsiteInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteInfoEmailSetting" EntityType="Self.WebsiteInfoEmailSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteInfoEmailSettingType" EntityType="Self.WebsiteInfoEmailSettingType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteInfoSmsAndNotification" EntityType="Self.WebsiteInfoSmsAndNotification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebsiteInfoSmsAndNotificationStatus" EntityType="Self.WebsiteInfoSmsAndNotificationStatus" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Currency_Country" Association="Self.FK_Currency_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Currency" EntitySet="Currency" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailingList_Country" Association="Self.FK_MailingList_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="MailingList" EntitySet="MailingList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailingList_DeviceType_Add" Association="Self.FK_MailingList_DeviceType_Add">
+      <End Role="DeviceType" EntitySet="DeviceType" />
+      <End Role="MailingList" EntitySet="MailingList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailingList_Language" Association="Self.FK_MailingList_Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="MailingList" EntitySet="MailingList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Messages_DeviceType_Add" Association="Self.FK_Messages_DeviceType_Add">
+      <End Role="DeviceType" EntitySet="DeviceType" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Info_AspNetUsers" Association="Self.FK_Post_Info_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Post_Info" EntitySet="Post_Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_Answer_Values_Questions" Association="Self.FK_Question_Answer_Values_Questions">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Question_Answer_Values" EntitySet="Question_Answer_Values" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Answer_Types" Association="Self.FK_Questions_Answer_Types">
+      <End Role="Answer_Types" EntitySet="Answer_Types" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Comunities_Communities" Association="Self.FK_Questions_Comunities_Communities">
+      <End Role="Communities" EntitySet="Communities" />
+      <End Role="Questions_Comunities" EntitySet="Questions_Comunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Comunities_Questions" Association="Self.FK_Questions_Comunities_Questions">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Questions_Comunities" EntitySet="Questions_Comunities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_Post_Info" Association="Self.FK_Questions_Post_Info">
+      <End Role="Post_Info" EntitySet="Post_Info" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Roleprimission_AspNetRoles" Association="Self.FK_Roleprimission_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="Roleprimissions" EntitySet="Roleprimissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Roleprimission_Pages" Association="Self.FK_Roleprimission_Pages">
+      <End Role="Pages" EntitySet="Pages" />
+      <End Role="Roleprimissions" EntitySet="Roleprimissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiteManagementSection_SiteManagement" Association="Self.FK_SiteManagementSection_SiteManagement">
+      <End Role="SiteManagement" EntitySet="SiteManagement" />
+      <End Role="SiteManagementSection" EntitySet="SiteManagementSection" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Answers_AspNetUsers" Association="Self.FK_User_Answers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_Answers" EntitySet="User_Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Answers_Questions" Association="Self.FK_User_Answers_Questions">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="User_Answers" EntitySet="User_Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Communities_AspNetUsers" Association="Self.FK_User_Communities_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_Communities" EntitySet="User_Communities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Communities_Communities" Association="Self.FK_User_Communities_Communities">
+      <End Role="Communities" EntitySet="Communities" />
+      <End Role="User_Communities" EntitySet="User_Communities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebsiteInfoEmailSetting_WebsiteInfo" Association="Self.FK_WebsiteInfoEmailSetting_WebsiteInfo">
+      <End Role="WebsiteInfo" EntitySet="WebsiteInfo" />
+      <End Role="WebsiteInfoEmailSetting" EntitySet="WebsiteInfoEmailSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebsiteInfoEmailSetting_WebsiteInfoEmailSettingTypeID" Association="Self.FK_WebsiteInfoEmailSetting_WebsiteInfoEmailSettingTypeID">
+      <End Role="WebsiteInfoEmailSettingType" EntitySet="WebsiteInfoEmailSettingType" />
+      <End Role="WebsiteInfoEmailSetting" EntitySet="WebsiteInfoEmailSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebsiteInfoSmsAndNotification_WebsiteInfo" Association="Self.FK_WebsiteInfoSmsAndNotification_WebsiteInfo">
+      <End Role="WebsiteInfo" EntitySet="WebsiteInfo" />
+      <End Role="WebsiteInfoSmsAndNotification" EntitySet="WebsiteInfoSmsAndNotification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebsiteInfoSmsAndNotification_WebsiteInfoSmsAndNotificationStatus" Association="Self.FK_WebsiteInfoSmsAndNotification_WebsiteInfoSmsAndNotificationStatus">
+      <End Role="WebsiteInfoSmsAndNotificationStatus" EntitySet="WebsiteInfoSmsAndNotificationStatus" />
+      <End Role="WebsiteInfoSmsAndNotification" EntitySet="WebsiteInfoSmsAndNotification" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

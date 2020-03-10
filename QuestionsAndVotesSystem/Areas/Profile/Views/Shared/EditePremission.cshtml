@@ -1,0 +1,13 @@
+﻿
+@using QuestionsAndVotesSystem.Areas.Profile.Helper;
+@using QuestionsAndVotesSystem.Api.Model
+@model QuestionsAndVotesSystem.Api.Model.Links
+
+@if (Session["CanUpdate"] != null)
+{
+
+    if (Session["CanUpdate"].Equals(true))
+    {
+        @Html.Raw(@Html.Links("_self", "", "Edit", @Model.Action, 2));
+    }
+}

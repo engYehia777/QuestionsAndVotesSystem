@@ -1,0 +1,100 @@
+﻿@model QuestionsAndVotesSystem.Api.Model.MVRolesSetting
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<h2>Edit Role</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="box-body">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => @Model.Role.Id)
+
+        <div class="form-group ">
+            <label class="control-label col-md-2" for="Role_Name">Name</label>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Role.Name, new { @required = "required", @class = "form-control " })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Role_Name">Active</label>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Role.IsActive)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-12 row  ItemHR Head">
+                <div class="col-lg-4"> Pages</div>
+                <div class="col-lg-2"> <input type="checkbox" class="SelectALl showClass"> Show</div>
+                <div class="col-lg-2"> <input type="checkbox" class="SelectALl UpdateClass"> Edit</div>
+                <div class="col-lg-2"> <input type="checkbox" class="SelectALl AddClass"> Greate</div>
+                <div class="col-lg-2"> <input type="checkbox" class="SelectALl DeleteClass"> Delete </div>
+            </div>
+
+
+            @for (int i = 0; i < Model.Pages.Count; i++)
+            {<div class="col-lg-12 row ItemHR">
+
+                <div class="col-lg-4"> @Model.Pages[i].Page.Name</div>
+                @Html.HiddenFor(model => @model.Pages[i].RoleId, @Model.Pages)
+                @Html.HiddenFor(model => @model.Pages[i].PageID, @Model.Pages)
+                <div class="col-lg-2 ADD"> @Html.CheckBoxFor(model => model.Pages[i].CanShow, new { @class = "showClass" })</div>
+                <div class="col-lg-2 Update"> @Html.CheckBoxFor(model => model.Pages[i].CanUpdate, new { @class = "UpdateClass" })  </div>
+                <div class="col-lg-2 Delete">@Html.CheckBoxFor(model => model.Pages[i].CanADD, new { @class = "AddClass" })  </div>
+                <div class="col-lg-2 Show"> @Html.CheckBoxFor(model => model.Pages[i].CanDelete, new { @class = "DeleteClass" })  </div>
+
+            </div>  }
+
+
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        $('.SelectALl').click(function () { var ValueCheck = $(this).prop('checked'); var classes = $(this).attr('class').split(' '); var lastclas = classes[(classes.length) - 1]; $('.' + lastclas).each(function () { $(this).prop('checked', ValueCheck); }); });
+        $("input:checkbox").click(function () {
+            var thisclass = $(this).attr('class');
+            if (!$(this).prop('checked')) {
+                $('.SelectALl.' + thisclass).prop('checked', false);
+            }
+            else {
+                var check = true;
+                $('.' + thisclass).each(function () {
+                    if (!$(this).hasClass("SelectALl")) {
+                        check = check && $(this).prop('checked');
+                    }
+                });
+                $('.SelectALl.' + thisclass).prop('checked', check);
+            }
+        });
+    </script>
+}
+
+

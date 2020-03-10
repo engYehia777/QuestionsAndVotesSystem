@@ -1,0 +1,167 @@
+﻿@model QuestionsAndVotesSystem.Api.Model.ViewModels.CommunityVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+
+}
+
+
+<h2>Index</h2>
+
+<p>
+    @{Html.RenderAction("Links", "authorization", new { URl = "/Profile/Communities/Create", ID = "kl", type = "A" });
+    }
+</p>
+<table id="communityTbl" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+           
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.communities)
+        {
+            <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                <td>
+                    @Ajax.ActionLink(" Details", "Details", new { id = item.Id }, new AjaxOptions()
+               {
+                   UpdateTargetId = "communityDetails",
+                   HttpMethod = "Get",
+                   InsertionMode = InsertionMode.Replace
+               }, new { @class = "btn btn-info glyphicon glyphicon-share", data_toggle = "modal", data_target = "#DetailsModal" })
+
+                    @{
+                        int Id = item.Id;
+                        Html.RenderAction("Links", "authorization", new { URl = "/Profile/Communities/Edit/" + Id, ID = "kl", type = "U" });
+
+                        //Html.RenderAction("Links", "authorization", new { URl = "/Profile/Communities/Details/" + Id, ID = "kl", type = "E" });
+                        Html.RenderAction("DeleteLink", "authorization", new { id = item.Id });
+                    }
+
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+
+                        }
+    </tbody>
+
+</table>
+
+
+<div id="DeleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure yo want to delete this row ??</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="confirmDel" class="btn btn-danger">delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="DetailsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <div id="communityDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section Scripts {
+
+    @if (ViewBag.AlertMsg != null)
+    {
+        <script type="text/javascript">
+            @Html.Raw(ViewBag.AlertMsg)
+        </script>
+    }
+
+    <script>
+
+        $(document).ready(function () {
+            $('#communityTbl').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            });
+
+            @*function RefreshView() {
+                let url = '@Url.Action("Index", "Communities")';
+                //$.get(url, function (data) {
+                //    //Do whatever u waht with response "Data"
+                //});
+
+
+                $.ajax({
+                    url: url,
+                    data: {}, //parameters go here in object literal form
+                    type: 'GET',
+                    datatype: 'json',
+                    success: function(data) { alert('got here with data'); },
+                    error: function() { alert('something bad happened'); }
+                });
+            }
+
+        });*@
+        $('#confirmDel').on('click', function () {
+            debugger;
+
+            let url = '@Url.Action("Delete", "Communities")';
+            let id = $('#del').attr("data-id");
+            $.post(url, { id: id})
+       .done(function (response, status, jqxhr) {
+           $("#communityTbl button[data-id|='" + id + "']").parent().parent().remove();
+           $('#DeleteModal').modal('hide');
+           AlertMsg('success', 'New Community was deleted successfully');
+
+
+       })
+       .fail(function (jqxhr, status, error) {
+           $('#DeleteModal').modal('hide');
+           AlertMsg('error', error);
+       })
+
+
+        })
+        });
+
+    </script>
+
+}

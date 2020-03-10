@@ -1,0 +1,75 @@
+﻿@model IEnumerable<QuestionsAndVotesSystem.Api.Model.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<h2>Users</h2>
+
+<p>
+    @{Html.RenderAction("Links", "authorization", new { URl = "/Profile/User/Create", ID = "kl", type = "A" });}
+</p>
+<table id="userTbl" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+         
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+               
+                <td>
+                    @{
+                        Html.RenderAction("Links", "authorization", new { URl = "/Profile/User/Edit/" + @item.Id, ID = "kl", type = "U" });
+                        //Html.RenderAction("Links", "authorization", new { URl = "/Profile/User/Details/" + @item.Id, ID = "kl", type = "E" });
+                       // Html.RenderAction("Links", "authorization", new { URl = "/Profile/User/Delete/" + @item.Id, ID = "kl", type = "D" });
+                    }
+
+                </td>
+            </tr>
+        }
+        </tbody>
+
+</table>
+
+
+@section scripts{
+    
+    <script>
+
+        $(document).ready(function () {
+            $('#userTbl').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            });
+        });
+
+    </script>
+}

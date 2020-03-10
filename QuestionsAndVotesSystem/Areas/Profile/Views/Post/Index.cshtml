@@ -1,0 +1,423 @@
+﻿@model  QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+}
+@*<style>
+        [type="file"] {
+            height: 0;
+            overflow: hidden;
+            width: 0;
+        }
+
+            [type="file"] + label {
+                background: #f15d22;
+                border: none;
+                border-radius: 5px;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                font-family: 'Poppins', sans-serif;
+                font-size: inherit;
+                font-weight: 600;
+                /*margin-top: 50px;*/
+                margin-bottom: 1rem;
+                outline: none;
+                padding: 1rem 30px;
+                position: relative;
+                transition: all 0.3s;
+                vertical-align: middle;
+            }
+
+                [type="file"] + label:hover {
+                    background-color: #d04c17;
+                }
+    </style>*@
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="box box-default collapsed-box box-solid">
+            <div class="box-header with-border text-center" style="padding:0 19px 0 19px" data-widget="collapse">
+                <h3 class="box-title">New Post</h3>
+                <span>
+                    <button type="button" class="btn btn-box-tool">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </span>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form id="postForm" method="post" enctype="multipart/form-data">
+
+                    @*@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { id = "newPost" , enctype = "multipart/form-data" }))
+                        {*@
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Add to Community</label>
+                                @Html.DropDownList("Select Community", Model.communities, "All", new { @class = "form-control select2", multiple = "multiple", style = "width: 100%;" })
+
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Answer type</label>
+                                @Html.DropDownList("Select Answer type", Model.answerTypes, new { @class = "form-control select2", style = "width: 100%;" })
+
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="datepicker" data-date-start-date="0d">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="chkRequired" class="flat-red">
+                                    Required
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="chkEditorChoice" class="flat-red">
+                                    Editor Choice
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label>Question text</label>
+                                <textarea id="Quesetion" name="QuesetionTitle" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="file" id="QPhotoFile" name="QPhotoFile" />
+                            @*<input type="file" name="file" id="Qfile" />
+                                <label for="file"><i class="fa fa-fw fa-file-image-o"></i></label>*@
+                            <div>
+                                @*<img src="@Url.Content("")" width="150" height="150" />*@
+                            </div>
+                        </div>
+                    </div>
+                    @*answer types*@
+                    <div id="answers">
+                        <div class="row answerItem">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input class="answer" type="checkbox" disabled="disabled">
+                                    </span>
+                                    <input type="text" class="form-control js" placeholder="Option">
+                                    <span class="input-group-addon">
+                                        <button id="removeItem" type="button" class="btn btn-box-tool pull-right"><i class="fa fa-times"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="file" class="answerImg" />
+
+                                <div>
+                                    @*<img src="@Url.Content("")" width="150" height="150" />*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input class="answer" type="checkbox" disabled="disabled">
+                                    </span>
+                                    <input type="text" class="form-control js" placeholder="Option">
+                                    <span class="input-group-addon">
+                                        <button id="removeItem" type="button" class="btn btn-box-tool pull-right"><i class="fa fa-times"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="file" class="answerImg" />
+
+                                <div>
+                                    @*<img src="@Url.Content("")" width="150" height="150" />*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-default btn-sm" id="addOption" type="button">Add option</button>
+                    <div class="box-footer">
+                        <button id="saveForm" class="btn btn-primary btn-lg" type="submit"> Add</button>
+
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+
+<div id="postat">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <!-- Box Post -->
+            <div class="box box-widget">
+                <div class="box-header with-border" style="padding:25px">
+
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
+                            <i class="fa fa-circle-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    @foreach (var question in Model.indexQuestions)
+                    {
+                        <div class="row">
+                            <!-- post text -->
+                            <h4 class="pad">
+                                @question.QuesetionTitle
+                            </h4>
+
+                            <!-- Attachment -->
+                            <div class="col-md-12 text-center pad clearfix">
+                                <img class="img-bordered" src="@question.QPhotoFile" alt="question Image">
+
+                            </div>
+                        </div>
+                        <!-- /.attachment-block -->
+
+                            <!-- answers section -->
+                        <div class="row-action-primary">
+                            <!-- answer image -->
+
+                            @foreach (var answer in question.answerValues)
+                            {
+                                <div class="col-md-6">
+                                    <div class="box box-solid">
+                                        <img class="img-thumbnail " src="@answer.PhotoUrl" alt="answer Image">
+                                    </div>
+                                    @if (question.answerType == "checkbox")
+                                    {
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>@(answer.OptionNum + 1)</label>
+                                            <label>
+                                                <input type="checkbox">
+                                                @answer.AnswerValue
+                                            </label>
+                                        </div>
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                    <div class="form-group">
+                                        <div class="radio">
+                                            <label>@(answer.OptionNum + 1)</label>
+                                            <label>
+                                                <input type="radio" name="optionsRadios" value="@answer.OptionNum">
+                                                @answer.AnswerValue
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    }
+                                </div>
+                            }
+
+                                </div>
+                     }
+
+                            <!-- Social sharing buttons -->
+                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                            <span class="pull-right text-muted">45 likes - 2 comments</span>
+
+                        </div>
+                <!-- /.box-body -->
+              
+                    </div>
+            <!-- /.box -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        @section Scripts {
+
+            @Scripts.Render("~/bundles/jqueryval")
+
+            @if (ViewBag.AlertMsg != null)
+    {
+                <script type="text/javascript">
+                    @Html.Raw(ViewBag.AlertMsg)
+                </script>
+            }
+
+            <script>
+
+                $(document).ready(function () {
+
+                    //Initialize Select2 drop downlists Elements
+                    $('.select2').select2();
+
+
+                    $("#Select_Answer_type").change(function () {
+                        var newType = $("#Select_Answer_type Option:Selected").val();
+                        $(".answer").attr("type", newType)
+                    });
+
+                    //add new answer option
+                    $("#addOption").click(function () {
+                        //var cloneItm = $(".answerItem").clone(true);
+                        //$("#answers").append(cloneItm);
+
+                        $(".answerItem").clone().appendTo('#answers');
+                        $('#answers .row').first().removeClass('answerItem');
+                        //$('#answers .row').last().find('input[type=text]')
+
+                    });
+
+                    // remove answer option
+                    $(document).on('click', '#removeItem', function () {
+
+                        if ($('#removeItem').closest('.row').hasClass('answerItem')) {
+                            return false;
+                        }
+                        $('#removeItem').closest('.row').remove();
+                    });
+
+                    //Date picker
+                    $('#datepicker').datepicker({
+                        autoclose: true,
+                        format: 'dd/mm/yyyy'
+                    })
+
+
+                    // submit form
+                    $('#postForm').submit(function (e) {
+                        e.preventDefault();
+
+
+                        debugger;
+                        var data = new FormData();
+
+                        var QPhoto = $("#QPhotoFile").get(0).files;
+                        //// Add the question image to the form data collection
+                        if (QPhoto.length > 0) data.append("QPhotoFile", QPhoto[0]);
+
+                        // if all is selected escap the othe options and save 0 in the database
+                        var flag = 0;
+                        $('#Select_Community option:selected').each(function (element) {
+                            debugger;
+
+                            if ($(this).val() === '') {
+                                falg = 0;
+                                return false;
+                            }
+                            flag = 1;
+
+                        });
+                        if (flag == 1) {
+                            var ComunitieIds = $('#Select_Community option:selected').map(function () {
+                                return ($(this).val());
+                            }).get().join(";");
+
+                            data.append("ComunitieIds", ComunitieIds);
+                        } else {
+                            data.append("ComunitieIds", '0');
+                        }
+
+
+
+                        var AnswerType = $('#Select_Answer_type option:selected').val();
+                        data.append("AnswerType", AnswerType);
+
+                        var QuesetionTitle = $('#Quesetion').val();
+                        if (QuesetionTitle == '') {
+                            AlertMsg('error', 'please add question');
+                            return false;
+                        }
+                        data.append("QuesetionTitle", QuesetionTitle);
+
+                        var endDate = $('#datepicker').val();
+                        data.append("EndDate", endDate);
+
+                        var reqired = $('#chkRequired').is(":checked");
+                        data.append("IsRequired", reqired);
+
+                        var editorChoice = $('#chkEditorChoice').is(":checked");
+                        data.append("IsRankeditorChoice", editorChoice);
+
+
+                        var answerValues = $('#answers .js').map(function () {
+                            return $(this).val();
+                        }).get().join(";");
+                        data.append("answerValues", answerValues);
+
+                        // Add the question answers images to the form data collection
+                        $('#answers .answerImg').each(function () {
+                            if ($(this).get(0).files.length > 0) {
+                                debugger;
+                                data.append("answerImgs", $(this).get(0).files[0]);
+                            }
+
+                        });
+
+
+                        $.ajax({
+                            type: "post",
+                            url: "/Profile/Post/Create",
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+
+                                $('#postat').prepend(response);
+                            },
+                            error: function () {
+
+                                alert("ffff");
+                            }
+
+                        })
+                    });
+
+
+
+                });
+            </script>
+        }
+
+

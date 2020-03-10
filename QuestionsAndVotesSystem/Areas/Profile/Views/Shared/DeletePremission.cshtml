@@ -1,0 +1,13 @@
+﻿
+@using QuestionsAndVotesSystem.Areas.Profile.Helper;
+
+@model QuestionsAndVotesSystem.Api.Model.Links
+
+@if (Session["CanDelete"] != null)
+{
+
+    if (Session["CanDelete"].Equals(true))
+    {
+        @Html.Raw(@Html.Links(Model.URL, "", "Delete", @Model.Action, 5));
+    }
+}

@@ -1,0 +1,18 @@
+﻿
+@using QuestionsAndVotesSystem.Areas.Profile.Helper;
+@using System.Web.Security;
+@model QuestionsAndVotesSystem.Api.Model.Links
+
+
+@if (Request.IsAuthenticated)
+{
+
+
+    if (Session["CanADD"].Equals(true) && Session["CanUpdate"].Equals(true) && Session["CanDelete"].Equals(true))
+    {
+
+
+
+        @Html.Raw(@Html.Links("_self", "", "Dashboard", @Model.Action, 6));
+    }
+}

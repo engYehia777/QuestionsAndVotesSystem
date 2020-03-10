@@ -1,0 +1,14 @@
+﻿
+@using QuestionsAndVotesSystem.Areas.Profile.Helper;
+@using QuestionsAndVotesSystem.Api.Model
+@model QuestionsAndVotesSystem.Api.Model.Links
+
+@if (Session["CanShow"] != null)
+{
+
+    if (Session["CanShow"].Equals(true))
+    {
+        string actionName = @Model.Action;
+        @Html.Raw(@Html.Links("_self", "", "Details", actionName, 3));
+    }
+}

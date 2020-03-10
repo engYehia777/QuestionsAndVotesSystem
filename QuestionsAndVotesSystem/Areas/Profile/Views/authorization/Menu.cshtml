@@ -1,0 +1,28 @@
+﻿@model IEnumerable<QuestionsAndVotesSystem.Api.Model.UserPages_Result>
+
+
+
+    <ul class="sidebar-menu" data-widget="tree">
+        @foreach (var item in Model.Where(s => s.ParentID == null))
+        {
+            bool hasChild = (Model.Where(s => s.ParentID == item.ID).Count() != 0) ? true : false;
+            <li class="@((hasChild == true) ? "treeview" : "")">
+                <a href="@item.URL">
+                    <i class="@item.Icone"></i> <span>@item.Name</span>
+                        <span class="pull-right-container">
+                            <i class="@((hasChild == true) ? "fa fa-angle-left pull-right" : "")"></i>
+                        </span>
+                </a>
+                @if (hasChild)
+                {
+                    <ul class="treeview-menu">
+                        @foreach (var Child in Model.Where(s => s.ParentID == item.ID))
+                        {
+                            <li><a href="@Child.URL">@Child.Name</a></li>
+                        }
+                    </ul>
+                }
+            </li>
+    }
+    </ul>
+
