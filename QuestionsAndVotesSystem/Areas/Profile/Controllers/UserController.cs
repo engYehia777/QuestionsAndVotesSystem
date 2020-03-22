@@ -96,7 +96,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
         // POST: Profile/User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(AspNetUser aspnetuser, string[] Role)
+        public async Task<ActionResult> Edit(AspNetUser aspnetuser, string[] Roles)
         {
             ViewBag.Roles = new MultiSelectList(db.AspNetRoles.Where(s => s.IsActive == true), "Name", "Name", aspnetuser.AspNetRoles.Where(s => s.IsActive == true).Select(s => s.Name).ToList());
             if (ModelState.IsValid)
@@ -128,10 +128,10 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
                     NeedToDelet =
                             UserPrimtion.Except(
                                   UserPrimtion.Where(
-                                      x => Role.Contains((string)x)
+                                      x => Roles.Contains((string)x)
 
                       )).ToList();
-                    NeedToAdd = Role.Except(Role.Where(x => UserPrimtion.Select(s => s).Contains(x))).ToList();
+                    NeedToAdd = Roles.Except(Roles.Where(x => UserPrimtion.Select(s => s).Contains(x))).ToList();
                     foreach (string Name in NeedToDelet)
                     {
                         await manager.RemoveFromRoleAsync(aspnetuser.Id, Name);

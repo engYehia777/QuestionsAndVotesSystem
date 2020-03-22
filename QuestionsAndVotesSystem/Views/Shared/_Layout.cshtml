@@ -1,11 +1,17 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title</title>
+  
+    
+    @Styles.Render("~/Content/Profilecss")
+    @Styles.Render("~/Content/DataTableCss")
+    @Styles.Render("~/Content/Toastr")
+
+  
 
 </head>
 <body>
@@ -17,22 +23,77 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Questions and Votes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>
-                        @{
-                            Html.RenderAction("Links", "authorization",
-                                new { Url = "/Profile/Home", ID = "NewPage", type = "DashLink" }
-                                );
-                        }
-                    </li>
+                    <li>@Html.ActionLink("Communities", "AllCommunites", "Communites")</li>
+                   
                 </ul>
-              
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="~/Areas/Profile/dist/img/user1-128x128.jpg" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">@HttpContext.Current.User.Identity.Name</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="~/Areas/Profile/dist/img/user1-128x128.jpg" class="img-circle" alt="User Image">
+
+                                    <p>
+                                        Thanh Nguyen - Web Developer
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Profile</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a> 
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="row">
+                                        <div class="col-md-6 pull-left">
+                                          
+                                            <a class="btn btn-default btn-flat" href="/Profile/Home">Dashboard</a>
+                                        </div>
+                                        <div class="col-md-6 pull-right">
+                                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
+
+                                                @Html.AntiForgeryToken()
+                                                <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -44,8 +105,49 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/ProfileLibs")
+    @Scripts.Render("~/bundles/DataTableLibs")
+    @Scripts.Render("~/bundles/Toastr")
+
+    <script type="text/javascript">
+
+            toastr.options = {
+                "closeButton": true,
+                "positionClass": "toast-bottom-right",
+                "timeOut": "4000"
+            };
+            function AlertMsg(type, msg) {
+                if (type == 'success') {
+                    toastr.success(msg)
+                }
+                else if (type == 'info') {
+                    toastr.info(msg)
+                }
+                else if (type == 'warning') {
+                    toastr.warning(msg)
+                }
+                else if (type == 'error') {
+                    toastr.error(msg)
+                }
+
+
+            }
+
+
+    </script>
+
+    @*Resolve conflict in jQuery UI tooltip with Bootstrap tooltip*@
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+
+    @*Material Design*@
+    <script>
+        $.material.init();
+    </script>
+
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

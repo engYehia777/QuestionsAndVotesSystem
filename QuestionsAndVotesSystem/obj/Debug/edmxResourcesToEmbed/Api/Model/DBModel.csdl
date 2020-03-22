@@ -373,7 +373,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="QuestionId" Type="Int32" Nullable="false" />
-    <Property Name="SelectedAnswerIds" Type="Int32" Nullable="false" />
+    <Property Name="SelectedAnswerIds" Type="String" Nullable="false" />
     <NavigationProperty Name="Question" Relationship="Self.FK_User_Answers_Questions" FromRole="User_Answers" ToRole="Questions" />
     <NavigationProperty Name="AspNetUser" Relationship="QuestionsVotesModel.FK_User_Answers_AspNetUsers" FromRole="User_Answers" ToRole="AspNetUser" />
   </EntityType>
@@ -820,10 +820,6 @@
       <Parameter Name="delimited" Mode="In" Type="String" />
       <Parameter Name="delimiter" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="UserSecurityPages" ReturnType="Collection(QuestionsVotesModel.UserSecurityPages_Result)">
-      <Parameter Name="UserID" Mode="In" Type="String" />
-      <Parameter Name="PageName" Mode="In" Type="String" />
-    </FunctionImport>
     <EntitySet Name="C__MigrationHistory" EntityType="QuestionsVotesModel.C__MigrationHistory" />
     <EntitySet Name="AspNetRoles" EntityType="QuestionsVotesModel.AspNetRole" />
     <EntitySet Name="AspNetUserClaims" EntityType="QuestionsVotesModel.AspNetUserClaim" />
@@ -860,6 +856,10 @@
     <FunctionImport Name="UserPages" ReturnType="Collection(QuestionsVotesModel.UserPages_Result)">
       <Parameter Name="UserID" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="UserSecurityPages" ReturnType="Collection(QuestionsVotesModel.UserSecurityPages_Result)">
+      <Parameter Name="UserID" Mode="In" Type="String" />
+      <Parameter Name="PageName" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
     <Key>
@@ -880,6 +880,7 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Roleprimissions" Relationship="QuestionsVotesModel.FK_Roleprimission_AspNetRoles" FromRole="AspNetRole" ToRole="Roleprimission" />
     <NavigationProperty Name="AspNetUsers" Relationship="QuestionsVotesModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+    <Property Name="Discriminator" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>

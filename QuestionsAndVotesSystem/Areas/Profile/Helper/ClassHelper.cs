@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuestionsAndVotesSystem.Api.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,15 +27,13 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Helper
             {
                 return String.Format("<a target='{0}'  class='{1} ICON' {3}>{2}  <span class='glyphicon glyphicon-trash' title='Delete'> </span> Delete</a>", target, "btn btn-danger", "", action);
             }
-            else if (type == 6)
-            {
-                return String.Format("<a target='{0}'{1}>Dashboard</a>", target, action);
-            }
+           
 
             else
             {
                 return String.Format("<a target='{0}'  class='{1} ICON' {3}>{2}</a>", target, "btn-link", TextLable, action);
             }
         }
+
     }
 }

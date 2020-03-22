@@ -75,6 +75,15 @@ namespace QuestionsAndVotesSystem.Api.Model
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Split_Result>("[DBEntities].[Split](@delimited, @delimiter)", delimitedParameter, delimiterParameter);
         }
     
+        public virtual ObjectResult<UserPages_Result> UserPages(string userID)
+        {
+            var userIDParameter = userID != null ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserPages_Result>("UserPages", userIDParameter);
+        }
+    
         public virtual ObjectResult<UserSecurityPages_Result> UserSecurityPages(string userID, string pageName)
         {
             var userIDParameter = userID != null ?
@@ -86,15 +95,6 @@ namespace QuestionsAndVotesSystem.Api.Model
                 new ObjectParameter("PageName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserSecurityPages_Result>("UserSecurityPages", userIDParameter, pageNameParameter);
-        }
-    
-        public virtual ObjectResult<UserPages_Result> UserPages(string userID)
-        {
-            var userIDParameter = userID != null ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserPages_Result>("UserPages", userIDParameter);
         }
     }
 }

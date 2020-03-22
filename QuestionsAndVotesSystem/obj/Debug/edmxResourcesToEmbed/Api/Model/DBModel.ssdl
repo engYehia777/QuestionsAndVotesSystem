@@ -26,6 +26,7 @@
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Discriminator" Type="varchar" MaxLength="25" />
   </EntityType>
   <EntityType Name="AspNetUserClaims">
     <Key>
@@ -410,7 +411,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="QuestionId" Type="int" Nullable="false" />
-    <Property Name="SelectedAnswerIds" Type="int" Nullable="false" />
+    <Property Name="SelectedAnswerIds" Type="nvarchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <EntityType Name="User_Communities">
     <Key>

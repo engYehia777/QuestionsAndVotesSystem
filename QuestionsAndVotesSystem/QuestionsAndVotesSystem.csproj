@@ -79,6 +79,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -339,7 +341,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Profile\AuthorizeRole\AjaxAuthorizeAttribute.cs" />
     <Compile Include="Areas\Profile\AuthorizeRole\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Areas\Profile\AuthorizeRole\SkipAuthorizeRoleFilter.cs" />
     <Compile Include="Areas\Profile\Controllers\CommunitiesController.cs" />
     <Compile Include="Areas\Profile\Controllers\authorizationController.cs" />
     <Compile Include="Areas\Profile\Controllers\HomeController.cs" />
@@ -354,8 +358,10 @@
     <Compile Include="Areas\Profile\Helper\ClassHelper.cs" />
     <Compile Include="Areas\Profile\ProfileAreaRegistration.cs" />
     <Compile Include="Areas\Profile\Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommunitesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Profile\Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostMVCController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -7693,7 +7699,6 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Views\Shared\DashBoardLink.cshtml" />
     <Content Include="Areas\Profile\Views\Communities\Index.cshtml" />
     <Content Include="Areas\Profile\Views\Communities\Create.cshtml" />
     <Content Include="Content\toastr.scss" />
@@ -7702,7 +7707,8 @@
     <Content Include="Areas\Profile\Views\Communities\_CommunityDetails.cshtml" />
     <Content Include="Areas\Profile\Views\Language\_LanguageMenu.cshtml" />
     <Content Include="Areas\Profile\Views\Post\Index.cshtml" />
-    <Content Include="Areas\Profile\Views\Post\_PostItem.cshtml" />
+    <Content Include="Areas\Profile\Views\Post\_Create.cshtml" />
+    <Content Include="Areas\Profile\Views\Post\_Feed.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7739,6 +7745,8 @@
     <Content Include="Areas\Profile\Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Areas\Profile\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\Profile\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\NotAuth.cshtml" />
+    <Content Include="Views\Communites\AllCommunites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\UploadedImages\" />
@@ -7747,6 +7755,7 @@
     <Folder Include="Areas\Profile\Models\" />
     <Folder Include="Areas\Profile\Views\Security\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\PostMVC\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,0 +1,129 @@
+﻿@model  QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+
+
+@*@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+@Html.Hidden("userId", Model.UserId)
+
+    @foreach (var question in Model.indexQuestions)
+    {
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <!-- Box Post -->
+
+                <div class="box box-widget">
+                    <div class="box-header with-border" style="padding:25px">
+                        <div class="user-block">
+                            <span>End at @question.EndDate</span>
+                        </div>
+                        <div class="box-tools">
+                           
+                            @*@{Html.RenderAction("Links", "authorization", new { URl = "#", ID = "kl", type = "U" , Area = "Profile" });
+                            }*@
+
+                            @if (this.User.IsInRole("admin"))
+                            {
+                                <button type="button" id="postEdit" class="btn btn-box-tool" data-toggle="tooltip" data-id="@question.questionId" title="Edit post">
+                                        <i class="fa fa-fw fa-pencil"></i>
+                                </button>
+                            }
+
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <!-- post text -->
+                            <div class="col-md-10">
+                                <h4 class="pad">
+                                    @question.QuesetionTitle
+                                </h4>
+                            </div>
+                            <!-- Attachment -->
+                            <div class="col-md-12 text-center pad clearfix">
+                                @if (@question.QPhotoFile != null)
+                                {
+                                    <img class="img-bordered" src="@question.QPhotoFile" alt="question Image">
+                                }
+
+                            </div>
+                        </div>
+                        <!-- /.attachment-block -->
+                        <!-- answers section -->
+                        <div class="row-action-primary">
+                            <!-- answer image -->
+
+                            @foreach (var answer in question.answerValues)
+                            {
+                                
+                                <div class="col-md-5 jumbotron">
+                                    <div class="box box-solid">
+                                        @if (@answer.PhotoUrl != null)
+                                        {
+                                            <img class="img-thumbnail " src="@answer.PhotoUrl" alt="answer Image">
+                                        }
+
+                                    </div>
+                                    @if (question.answerType == "checkbox")
+                                    {
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                                <label>@(answer.OptionNum + 1)</label>
+                                                <label>
+                                                    <input type="checkbox" data-answerID="@answer.Id">
+                                                    @answer.AnswerValue
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <label>@(answer.OptionNum + 1)</label>
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" data-answerID="@answer.Id" value="@answer.OptionNum">
+                                                    @answer.AnswerValue
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+                                <div class="col-md-1"></div>
+                            }
+
+                        </div>
+
+                        <div class="row">
+                            <!-- Social sharing buttons -->
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                                @*<button type="button" class="btn bg-olive btn-xs submit" data-QID="@question.questionId"> Submit</button>*@
+                                <a href="#" class="btn bg-olive btn-xs submit" data-QID="@question.questionId">Submit</a>
+                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+
+                <!-- /.box -->
+            </div>
+
+        </div>
+    }
+

@@ -43,9 +43,6 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
                 return PartialView("EditePremission", l);
             else if (type == "E")
                 return PartialView("DetailsPremission", l);
-            else if (type == "DashLink")
-                return PartialView("DashBoardLink", l);
-
             else
                 return PartialView("DeletePremission", l);
 

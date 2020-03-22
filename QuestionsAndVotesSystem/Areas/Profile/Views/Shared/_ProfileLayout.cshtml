@@ -164,7 +164,8 @@
                                             <a href="#">Followers</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="/Home/Index">Web Site</a>
+                                            <a href="#">Profile</a>
+                                            
                                         </div>
                                         <div class="col-xs-4 text-center">
                                             <a href="#">Friends</a>
@@ -174,18 +175,20 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post,new { id = "logoutForm" }))
-                                        {
+                                    <div class="row">
+                                        <div class="col-md-6 pull-left">
+                                            <a class="btn btn-default btn-flat" href="/Home/Index">Web Site</a>
+                                        </div>
+                                        <div class="col-md-6 pull-right">
+                                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
 
-                                            @Html.AntiForgeryToken()
-                                            <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                                                @Html.AntiForgeryToken()
+                                                <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
 
-                                        }
-                                       
+                                            }
+
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

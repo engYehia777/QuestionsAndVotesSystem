@@ -1,0 +1,101 @@
+﻿@model QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+
+@{
+
+    string[] aValues = Model.answerValues.Split(new Char[] { ';' });
+    string[] communiyIds = Model.ComunitieIds.Split(new Char[] { ';' });
+   
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <!-- Box Post -->
+            <div class="box box-widget">
+                <div class="box-header with-border" style="padding:25px">
+
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
+                            <i class="fa fa-circle-o"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <!-- post text -->
+                        <h4 class="pad">
+                           
+                            @Model.QuesetionTitle
+
+                        </h4>
+
+                        <!-- Attachment -->
+                        <div class="col-md-12 text-center pad clearfix">
+                            <img class="img-bordered" src="/Api/UploadedImages/@DateTime.Now.ToString("yyyyMMdd") + '-' + @Model.QPhotoFile.FileName" alt="question Image">
+
+                        </div>
+                    </div>
+                    <!-- /.attachment-block -->
+                    <!-- answers section -->
+                    <div class="row-action-primary">
+                        <!-- answer image -->
+
+                        @for (int i = 0; i < aValues.Length; i++)
+                        {
+
+                            <div class="col-md-6">
+                                <div class="box box-solid">
+                                    <img class="img-thumbnail " src="/Api/UploadedImages/@DateTime.Now.ToString("yyyyMMdd") + '-' +@Model.answerImgs[i].FileName" alt="answer Image">
+                                </div>
+
+                                @if (Model.AnswerType == "checkbox")
+                                {
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>@(i + 1)</label>
+                                            <label>
+                                                <input type="checkbox">
+                                                @aValues[i]
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <div class="radio">
+                                            <label>@(i + 1)</label>
+                                            <label>
+                                                <input type="radio" name="optionsRadios" value="@i">
+                                                @aValues[i]
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <!-- Social sharing buttons -->
+                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                    <span class="pull-right text-muted">45 likes - 2 comments</span>
+
+                </div>
+
+            </div>
+            <!-- /.box -->
+        </div>
+
+    </div>
+
+
+}

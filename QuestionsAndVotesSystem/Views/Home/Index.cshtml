@@ -1,31 +1,63 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model  QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+@{
+    ViewBag.Title = "Feed";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div id="postat" style="margin-top:67px">
+    @Html.Partial("~/Areas/Profile/Views/Post/_Feed.cshtml", Model)
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+@section Scripts {
+    <script>
+     $(document).ready(function () {
+            //supmit question
+         $(document).on('click', ".submit", function (e) {
+             debugger;
+             e.preventDefault();
+             var clikedBtn = $(this);
+             var answerInfo = {};
+             answerInfo.questionId = $(this).attr('data-qid');
+             answerInfo.UserId = $('#userId').val();
+
+             var answerIds = $(this).closest('.row').prev().find('input').map(function () {
+                     if ($(this).is(":checked")) {
+                         return $(this).attr('data-answerid');
+                     }
+             }).get().join(";");
+             if (answerIds == '') { AlertMsg('error', 'please choose one option at least !!'); return false}
+             answerInfo.answerValues = answerIds;
+
+             let url = '@Url.Action("AnswerSubmit", "PostMVC")';
+             $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: JSON.stringify(answerInfo),
+                 contentType: "application/json",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response) {
+                        // clikedBtn.attr('href', '/Profile/Index');
+                         clikedBtn.html('Go to summery');
+                         clikedBtn.removeClass('bg-olive submit').addClass('btn-info');
+                         AlertMsg('success', 'Your response has been recorded');
+                     } else {
+                         AlertMsg('error', 'somthing wrong happen');
+                     }
+                 },
+                 error: function (response) {
+                     // if the user not loged in  or not registerd redirected to login page
+                     // response data come from filter attribute [AjaxAuthorize] above the tarrget action
+                     if (response.status == 403 || response.status == 401) {
+                         var result = $.parseJSON(response.responseText);
+                         window.location = result.LogOnUrl;
+                     }
+                   
+                 }
+             });
+         });
+     });
+
+     </script>
+    }

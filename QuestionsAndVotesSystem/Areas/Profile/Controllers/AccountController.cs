@@ -12,20 +12,35 @@ using QuestionsAndVotesSystem.Api.Model;
 
 namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
 {
-    
+   
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
+        }
+
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -76,10 +91,13 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //string IDUser = HttpContext.User.Identity.GetUserId();
+            //DBEntities db = new DBEntities();
+            //db.AspN
             switch (result)
             {
                 case SignInStatus.Success:
-                    return Redirect("~/Profile/Home/Index");
+                    return Redirect("~/Home/Index");
                     //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -157,15 +175,17 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // here we add the registerd user to user Role
+                    result = await UserManager.AddToRoleAsync(user.Id, RoleManager.Roles.FirstOrDefault(r => r.Name == "user").Name);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToRoute("Default");
                 }
                 AddErrors(result);
             }
@@ -394,7 +414,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account", new { area= "Profile"});
         }
 
         //

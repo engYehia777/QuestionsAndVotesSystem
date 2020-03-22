@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
 }
-
+<link href="~/Areas/Profile/dist/css/bootstrap-select.css" rel="stylesheet" />
 <h2>Create New User</h2>
 
 
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="ControlName">Role</label>
             <div class="col-md-8">
-                @Html.DropDownList("Roles", null, htmlAttributes: new { @class = "form-control select2", multiple= "multiple", required = "required" })
+                @Html.DropDownList("Roles", null, htmlAttributes: new { @class = "form-control selectpicker bs-select-hidden", multiple= "multiple", required = "required" })
             </div>
         </div>
 
@@ -79,10 +79,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+<script src="~/Areas/Profile/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript">
                 $(document).ready(function () {
-                    $('.select2').select2();
+                    $('.selectpicker').selectpicker();
                 });
 </script>
-}

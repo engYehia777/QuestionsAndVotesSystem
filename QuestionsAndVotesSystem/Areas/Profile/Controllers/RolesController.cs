@@ -1,6 +1,7 @@
 ﻿using QuestionsAndVotesSystem.Api.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -40,10 +41,36 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
             if (ModelState.IsValid)
             {
                 MVRole.Role.IsActive = true;
+
                 db.AspNetRoles.Add(MVRole.Role);
 
                 db.Roleprimissions.AddRange(MVRole.Pages);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        string err = string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            string errr = string.Format("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+
+                           throw new Exception(errr);
+                        }
+                    }
+                   
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+                {
+                    string err = e.Message;
+                   
+                }
+
                 return RedirectToAction("Index");
             }
 

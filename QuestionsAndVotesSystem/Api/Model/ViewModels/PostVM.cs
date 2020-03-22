@@ -19,6 +19,7 @@ namespace QuestionsAndVotesSystem.Api.Model.ViewModels
         public List<PostPoco> indexQuestions { get; set; }
 
 
+        public int questionId { get; set; }
         public int PostId { get; set; }
         public string UserId { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
@@ -26,7 +27,7 @@ namespace QuestionsAndVotesSystem.Api.Model.ViewModels
         public string ComunitieIds { get; set; }
         public int AnswerTypeId { get; set; }
         public string AnswerType { get; set; }
-        [Required]
+        
         public string QuesetionTitle { get; set; }
         public HttpPostedFileBase QPhotoFile { get; set; }
         public Nullable<bool> IsRequired { get; set; }
@@ -36,6 +37,8 @@ namespace QuestionsAndVotesSystem.Api.Model.ViewModels
         public int OptionNum { get; set; }
         public string answerValues { get; set; }
         public List<HttpPostedFileBase> answerImgs { get; set; }
+
+        
 
     }
 }

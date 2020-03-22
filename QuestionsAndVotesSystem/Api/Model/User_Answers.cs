@@ -17,7 +17,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public int Id { get; set; }
         public string UserId { get; set; }
         public int QuestionId { get; set; }
-        public int SelectedAnswerIds { get; set; }
+        public string SelectedAnswerIds { get; set; }
     
         public virtual Question Question { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

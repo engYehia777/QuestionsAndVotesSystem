@@ -492,17 +492,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UserSecurityPages" FunctionName="QuestionsVotesModel.Store.UserSecurityPages">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="QuestionsVotesModel.UserSecurityPages_Result">
-          <ScalarProperty Name="CanADD" ColumnName="CanADD" />
-          <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
-          <ScalarProperty Name="CanShow" ColumnName="CanShow" />
-          <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
-          <ScalarProperty Name="CanSearch" ColumnName="CanSearch" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="C__MigrationHistory">
       <EntityTypeMapping TypeName="QuestionsVotesModel.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -516,6 +505,7 @@
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="QuestionsVotesModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -586,6 +576,17 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Icone" ColumnName="Icone" />
           <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UserSecurityPages" FunctionName="QuestionsVotesModel.Store.UserSecurityPages">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QuestionsVotesModel.UserSecurityPages_Result">
+          <ScalarProperty Name="CanADD" ColumnName="CanADD" />
+          <ScalarProperty Name="CanUpdate" ColumnName="CanUpdate" />
+          <ScalarProperty Name="CanShow" ColumnName="CanShow" />
+          <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+          <ScalarProperty Name="CanSearch" ColumnName="CanSearch" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

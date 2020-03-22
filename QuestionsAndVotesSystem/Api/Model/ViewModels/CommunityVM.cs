@@ -12,6 +12,6 @@ namespace QuestionsAndVotesSystem.Api.Model.ViewModels
 
         public CommunityPoco Community { get; set; }
 
-
+        public string userId { get; set; }
     }
 }

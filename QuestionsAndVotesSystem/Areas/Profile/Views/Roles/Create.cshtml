@@ -16,6 +16,8 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => @Model.Role.Id)
+
         <div class="form-group">
             <label class="control-label col-md-2" for="Role_Name">Name</label>
             <div class="col-md-8">
