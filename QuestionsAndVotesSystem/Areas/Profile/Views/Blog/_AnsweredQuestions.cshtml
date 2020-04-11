@@ -1,0 +1,152 @@
+﻿@model  QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+
+
+@foreach (var question in Model.indexQuestions)
+{
+    <div class="box-group">
+        <div class="box box-info collapsed-box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@question.QuesetionTitle</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool btn-info" data-widget="collapse">View options <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="col-md-12 text-center pad clearfix">
+                    @if (@question.QPhotoFile != null)
+                {
+                        <img class="img-bordered" src="@question.QPhotoFile" alt="question Image">
+                    }
+
+                </div>
+                <div class="row-action-primary">
+                    <!-- answer image -->
+
+                    @foreach (var answer in question.answerValues)
+                {
+                        <div class="col-md-5 jumbotron">
+                            <div class="box box-solid">
+                                @if (@answer.PhotoUrl != null)
+                                {
+                                    <img class="img-thumbnail " src="@answer.PhotoUrl" alt="answer Image">
+                                }
+
+                            </div>
+                            @if (question.answerType == "checkbox")
+                            {
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>@(answer.OptionNum + 1)</label>
+                                        <label>
+                                            <input type="checkbox" data-answerID="@answer.Id">
+                                            @answer.AnswerValue
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="@(((double)answer.NumOfSelectedAnswers / (double)question.TotalAnswers) * 100)" data-skin="tron" data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+                                    <div class="knob-label">The number of selections= @answer.NumOfSelectedAnswers</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>@(answer.OptionNum + 1)</label>
+                                        <label>
+                                            <input type="radio" name="optionsRadios" data-answerID="@answer.Id" value="@answer.OptionNum">
+                                            @answer.AnswerValue
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="text" class="knob" value="@(((double)answer.NumOfSelectedAnswers / (double)question.TotalAnswers) * 100)" data-skin="tron" data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+                                    <div class="knob-label">The number of selections= @answer.NumOfSelectedAnswers</div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-1"></div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+        @*selected answers*@
+
+        <div class="box">
+            @if (this.User.IsInRole("user"))
+            {
+                <div class="box-body">
+                    @for (int i = 0; i < question.userAnswerIds.Length; i++)
+                    {
+
+                        var answers = question.answerValues.Where(a => a.Id == int.Parse(question.userAnswerIds[i])).ToList();
+
+                        <div class="col-md-5 jumbotron">
+                            @if (answers.Select(x => x.PhotoUrl).First() != null)
+                            {
+                                <img class="img-thumbnail " src="@answers.Select(x => x.PhotoUrl).First()" style="width:100%" alt="answer Image">
+                            }
+                            
+                            @if (question.answerType == "checkbox")
+                            {
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>@(answers.Select(x => x.OptionNum).First() + 1)</label>
+                                        <label>
+                                            <input type="checkbox" checked disabled data-answerID="@answers.Select(x => x.Id).First()">
+                                            @answers.Select(x => x.AnswerValue).First()
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <div class="radio">
+                                        <label>@(answers.Select(x => x.OptionNum).First() + 1)</label>
+                                        <label>
+                                            <input type="radio" checked disabled name="optionsRadios" data-answerID="@answers.Select(x => x.Id).First()" value="@answers.Select(x => x.AnswerValue).First()">
+                                            @answers.Select(x => x.AnswerValue).First()
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    }
+                </div>
+            }
+            <div class="box-footer clearfix">
+                @*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>*@
+                
+                <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-right">@question.TotalAnswers Responses</a>
+                @if (this.User.IsInRole("admin"))
+                {
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-left">Blog</a>
+
+                }
+                else
+                {
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-left">Summary</a>
+                }
+                <hr />
+                <div class="box-comments">
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+                    <div class="fb-comments" data-href="http://localhost:25061/Home/UserProfile" data-width="100%" data-numposts="5"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <hr style="height:2px; background-color:#00a65a" />
+}
+
+
+

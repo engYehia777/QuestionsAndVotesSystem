@@ -22,8 +22,8 @@ namespace QuestionsAndVotesSystem.Controllers
            
 
             CommunityVM community = new CommunityVM();
-            community.communities = data.GetCommunityListForUser(lang).ToList();
             community.userId = User.Identity.GetUserId();
+            community.communities = data.GetCommunityListForUser(community.userId, lang).ToList();
             return View(community);
         }
 

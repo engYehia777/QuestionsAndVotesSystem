@@ -3,13 +3,22 @@
     ViewBag.Title = "Feed";
 }
 
+@if (Model.indexQuestions.Count == 0)
+{
+    <h2>No questions found .. follow communites for more questions</h2>
+}
+else
+{
+    <div id="postat" style="margin-top:67px">
+        @Html.Partial("~/Areas/Profile/Views/Post/_Feed.cshtml", Model)
+    </div>
+}
 
-<div id="postat" style="margin-top:67px">
-    @Html.Partial("~/Areas/Profile/Views/Post/_Feed.cshtml", Model)
-</div>
+
 
 
 @section Scripts {
+
     <script>
      $(document).ready(function () {
             //supmit question
@@ -53,10 +62,51 @@
                          var result = $.parseJSON(response.responseText);
                          window.location = result.LogOnUrl;
                      }
-                   
+
                  }
              });
          });
+
+
+         //like btn
+         $(document).on('click', '.like', function () {
+             debugger;
+             var likeBtn = $(this);
+             
+            var questionId = $(this).attr('data-qid');
+            var UserId = $('#userId').val();
+             let url = '@Url.Action("Like", "PostMVC")';
+
+             $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: JSON.stringify({ questionId: questionId, UserId: UserId }),
+                 contentType: "application/json",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response) {
+
+                         likeBtn.html('liked');
+                         likeBtn.removeClass('bg-olive like').addClass('btn-info');
+
+                     } else {
+                         AlertMsg('error', 'somthing wrong happen');
+                     }
+                 },
+                 error: function (response) {
+                     // if the user not loged in  or not registerd redirected to login page
+                     // response data come from filter attribute [AjaxAuthorize] above the tarrget action
+                     if (response.status == 403 || response.status == 401) {
+                         var result = $.parseJSON(response.responseText);
+                         window.location = result.LogOnUrl;
+                     }
+
+                 }
+             });
+
+         });
+
+
      });
 
      </script>

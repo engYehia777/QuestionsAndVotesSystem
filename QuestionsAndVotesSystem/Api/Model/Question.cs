@@ -20,6 +20,7 @@ namespace QuestionsAndVotesSystem.Api.Model
             this.Question_Answer_Values = new HashSet<Question_Answer_Values>();
             this.Questions_Comunities = new HashSet<Questions_Comunities>();
             this.User_Answers = new HashSet<User_Answers>();
+            this.User_Likes = new HashSet<User_Likes>();
         }
     
         public int Id { get; set; }
@@ -30,8 +31,8 @@ namespace QuestionsAndVotesSystem.Api.Model
         public Nullable<bool> IsRequired { get; set; }
         public System.DateTime EndDate { get; set; }
         public Nullable<bool> IsRankeditorChoice { get; set; }
-        public Nullable<int> Points { get; set; }
-        public Nullable<int> TotalAnswers { get; set; }
+        public int Points { get; set; }
+        public int TotalAnswers { get; set; }
     
         public virtual Answer_Types Answer_Types { get; set; }
         public virtual Post_Info Post_Info { get; set; }
@@ -41,5 +42,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public virtual ICollection<Questions_Comunities> Questions_Comunities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Answers> User_Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Likes> User_Likes { get; set; }
     }
 }

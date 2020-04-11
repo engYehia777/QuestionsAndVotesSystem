@@ -42,21 +42,29 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
             
             
                 data.UserId= User.Identity.GetUserId();
-                data.CreationDate = DateTime.Now;
                 data.PostEndDate = data.EndDate;
-            if (apiData.Post(data))
+            if (data.questionId == 0 && data.PostId == 0)
             {
-                isSave = true;
-                return RedirectToAction("Index");
-
+                data.CreationDate = DateTime.Now;
+                isSave = apiData.Post(data);
             }
-           
-           
-            // return PartialView("_Create", data);
-            return Json(isSave, JsonRequestBehavior.AllowGet);
-         
-            
+            else
+            {
+                //isSave = apiData.Update(data);
+            }
+            if (isSave)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return Json(isSave, JsonRequestBehavior.AllowGet);
+            }
 
+
+
+            // return PartialView("_Create", data);
+            
         }
 
      
@@ -65,7 +73,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
         [HttpPost]
         public ActionResult Editpost(string id)
         {
-           // List<PostPoco> questionsList = new List<PostPoco>();
+          
             var question = apiData.Get(int.Parse(id));
             
             return Json(question, JsonRequestBehavior.AllowGet);

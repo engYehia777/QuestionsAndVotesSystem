@@ -21,7 +21,13 @@ namespace QuestionsAndVotesSystem.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        [AjaxAuthorize]
+        [HttpPost]
+        public ActionResult Like(int questionId, string UserId)
+        {
+            bool result = data.QuestionLike( questionId,  UserId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
 
 

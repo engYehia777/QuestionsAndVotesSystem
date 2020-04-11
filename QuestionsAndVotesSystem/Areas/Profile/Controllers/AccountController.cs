@@ -73,7 +73,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("~/Areas/Profile/Views/Account/Login.cshtml");
         }
 
         //
@@ -355,7 +355,8 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return Redirect("~/Home/Index");
+                // return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -365,7 +366,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("~/Areas/Profile/Views/Account/ExternalLoginConfirmation.cshtml", "~/Views/Shared/_Layout.cshtml", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName, Email = loginInfo.Email });
             }
         }
 
@@ -389,7 +390,7 @@ namespace QuestionsAndVotesSystem.Areas.Profile.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FullName = model.UserName, PhoneNumber=model.Mobile };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

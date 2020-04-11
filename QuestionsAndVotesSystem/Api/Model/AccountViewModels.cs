@@ -6,8 +6,17 @@ namespace QuestionsAndVotesSystem.Api.Model
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Mobile")]
+        [Phone]
+        public string Mobile { get; set; }
     }
 
     public class ExternalLoginListViewModel

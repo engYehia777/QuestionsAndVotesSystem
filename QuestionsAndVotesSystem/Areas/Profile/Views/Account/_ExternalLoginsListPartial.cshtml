@@ -1,7 +1,7 @@
 ﻿@model QuestionsAndVotesSystem.Api.Model.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Use another service to log in.</h4>
+@*<h4>Use another service to log in.</h4>
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -24,5 +24,30 @@
                 </p>
             </div>
         }
+    }
+}*@
+
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="socialLoginList">
+            <p>
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    if (p.AuthenticationType == "Facebook")
+                    {
+                        <button type="submit" class="btn btn-block btn-social btn-facebook btn-flat" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-block btn-social btn-google btn-flat" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+
+                    }
+                }
+            </p>
+        </div>
     }
 }

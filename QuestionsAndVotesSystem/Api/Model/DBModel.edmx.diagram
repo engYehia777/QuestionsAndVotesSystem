@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="QuestionsVotesModel.NotificationType" Width="1.5" PointX="17.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.Page" Width="1.5" PointX="15.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.Post_Info" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuestionsVotesModel.Question_Answer_Values" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuestionsVotesModel.Question_Answer_Values" Width="1.75" PointX="5.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.Question" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.Questions_Comunities" Width="2" PointX="7.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.Roleprimission" Width="1.5" PointX="18" PointY="10.625" IsExpanded="true" />
@@ -26,7 +26,7 @@
         <EntityTypeShape EntityType="QuestionsVotesModel.SiteManagementType" Width="1.5" PointX="17.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.SocialNetwork" Width="1.5" PointX="17.75" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.UploadFile" Width="1.5" PointX="15.75" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuestionsVotesModel.User_Answers" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuestionsVotesModel.User_Answers" Width="1.75" PointX="5.25" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.User_Communities" Width="1.875" PointX="8.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.WebsiteInfo" Width="1.5" PointX="0.75" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QuestionsVotesModel.WebsiteInfoEmailSetting" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
@@ -63,6 +63,9 @@
         <AssociationConnector Association="QuestionsVotesModel.FK_Post_Info_AspNetUsers" />
         <AssociationConnector Association="QuestionsVotesModel.FK_User_Answers_AspNetUsers" />
         <AssociationConnector Association="QuestionsVotesModel.FK_User_Communities_AspNetUsers" />
+        <EntityTypeShape EntityType="QuestionsVotesModel.User_Likes" Width="1.5" PointX="10.375" PointY="21.5" />
+        <AssociationConnector Association="QuestionsVotesModel.FK_User_User_Likes" />
+        <AssociationConnector Association="QuestionsVotesModel.FK_User_Likes_Questions" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,127 +3,148 @@
 
 @*@{
 
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
 
 @Html.Hidden("userId", Model.UserId)
 
-    @foreach (var question in Model.indexQuestions)
-    {
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <!-- Box Post -->
+@foreach (var question in Model.indexQuestions)
+{
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <!-- Box Post -->
 
-                <div class="box box-widget">
-                    <div class="box-header with-border" style="padding:25px">
-                        <div class="user-block">
-                            <span>End at @question.EndDate</span>
-                        </div>
-                        <div class="box-tools">
-                           
-                            @*@{Html.RenderAction("Links", "authorization", new { URl = "#", ID = "kl", type = "U" , Area = "Profile" });
+            <div class="box box-widget">
+                <div class="box-header with-border" style="padding:25px">
+                    <div class="user-block">
+                        <span>End at @question.endDate</span>
+                    </div>
+                    <div class="box-tools">
+
+                        @*@{Html.RenderAction("Links", "authorization", new { URl = "#", ID = "kl", type = "U" , Area = "Profile" });
                             }*@
 
-                            @if (this.User.IsInRole("admin"))
+                        @if (this.User.IsInRole("admin"))
+                        {
+                            <button type="button" id="postEdit" class="btn btn-box-tool" data-toggle="tooltip" data-id="@question.questionId" title="Edit post">
+                                <i class="fa fa-fw fa-pencil"></i>
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <!-- post text -->
+                        <div class="col-md-10">
+                            <h4 class="pad">
+                                @question.QuesetionTitle
+                            </h4>
+                        </div>
+                        <!-- Attachment -->
+                        <div class="col-md-12 text-center pad clearfix">
+                            @if (@question.QPhotoFile != null)
                             {
-                                <button type="button" id="postEdit" class="btn btn-box-tool" data-toggle="tooltip" data-id="@question.questionId" title="Edit post">
-                                        <i class="fa fa-fw fa-pencil"></i>
-                                </button>
+                                <img class="img-bordered" src="@question.QPhotoFile" alt="question Image">
                             }
 
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-
                         </div>
-                        <!-- /.box-tools -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
+                    <!-- /.attachment-block -->
+                    <!-- answers section -->
+                    <div class="row-action-primary">
+                        <!-- answer image -->
 
-                        <div class="row">
-                            <div class="col-md-1"></div>
-                            <!-- post text -->
-                            <div class="col-md-10">
-                                <h4 class="pad">
-                                    @question.QuesetionTitle
-                                </h4>
-                            </div>
-                            <!-- Attachment -->
-                            <div class="col-md-12 text-center pad clearfix">
-                                @if (@question.QPhotoFile != null)
-                                {
-                                    <img class="img-bordered" src="@question.QPhotoFile" alt="question Image">
-                                }
-
-                            </div>
-                        </div>
-                        <!-- /.attachment-block -->
-                        <!-- answers section -->
-                        <div class="row-action-primary">
-                            <!-- answer image -->
-
-                            @foreach (var answer in question.answerValues)
+                        @foreach (var answer in question.answerValues)
                             {
-                                
-                                <div class="col-md-5 jumbotron">
-                                    <div class="box box-solid">
-                                        @if (@answer.PhotoUrl != null)
+
+                            <div class="col-md-5 jumbotron">
+                                <div class="box box-solid">
+                                    @if (@answer.PhotoUrl != null)
                                         {
-                                            <img class="img-thumbnail " src="@answer.PhotoUrl" alt="answer Image">
+                                        <img class="img-thumbnail " src="@answer.PhotoUrl" alt="answer Image" style="width:100%">
                                         }
 
-                                    </div>
-                                    @if (question.answerType == "checkbox")
+                                </div>
+                                @if (question.answerType == "checkbox")
                                     {
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>@(answer.OptionNum + 1)</label>
-                                                <label>
-                                                    <input type="checkbox" data-answerID="@answer.Id">
-                                                    @answer.AnswerValue
-                                                </label>
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>@(answer.OptionNum + 1)</label>
+                                            <label>
+                                                <input type="checkbox" data-answerID="@answer.Id">
+                                                @answer.AnswerValue
+                                            </label>
                                         </div>
+                                    </div>
                                     }
                                     else
                                     {
-                                        <div class="form-group">
-                                            <div class="radio">
-                                                <label>@(answer.OptionNum + 1)</label>
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" data-answerID="@answer.Id" value="@answer.OptionNum">
-                                                    @answer.AnswerValue
-                                                </label>
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="radio">
+                                            <label>@(answer.OptionNum + 1)</label>
+                                            <label>
+                                                <input type="radio" name="optionsRadios" data-answerID="@answer.Id" value="@answer.OptionNum">
+                                                @answer.AnswerValue
+                                            </label>
                                         </div>
+                                    </div>
 
                                     }
-                                </div>
-                                <div class="col-md-1"></div>
+                            </div>
+                            <div class="col-md-1"></div>
                             }
 
-                        </div>
+                    </div>
 
-                        <div class="row">
-                            <!-- Social sharing buttons -->
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                                @*<button type="button" class="btn bg-olive btn-xs submit" data-QID="@question.questionId"> Submit</button>*@
+                    <div class="row">
+                        <!-- Social sharing buttons -->
+                        <div class="col-md-12">
+                            
+
+                            @*<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>*@
+                          
+                            @if (this.User.IsInRole("admin"))
+                            {
+                               
+                                <button type="button" class="btn bg-olive btn-xs submit" data-QID="@question.questionId"> Blog</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-default btn-xs like" data-QID="@question.questionId"><i class="fa fa-thumbs-o-up"></i> Like</button>
                                 <a href="#" class="btn bg-olive btn-xs submit" data-QID="@question.questionId">Submit</a>
-                                <span class="pull-right text-muted">45 likes - 2 comments</span>
+                                <span class="pull-right text-muted">45 likes</span>
+                            }
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8d74d1da1cdeee"></script>
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <div class="addthis_inline_share_toolbox"></div>
+                            <hr />
+                            <div class="box-comments">
+                                <div id="fb-root"></div>
+                                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0"></script>
+                                <div class="fb-comments" data-href="http://localhost:25061/Home/Index" data-width="100%" data-numposts="5"></div>
                             </div>
+                           
                         </div>
                     </div>
-                    <!-- /.box-body -->
-
                 </div>
+                <!-- /.box-body -->
 
-                <!-- /.box -->
             </div>
 
+            <!-- /.box -->
         </div>
-    }
+
+    </div>
+}
 

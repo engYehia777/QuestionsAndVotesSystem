@@ -27,16 +27,17 @@ namespace QuestionsAndVotesSystem.Api.Model.ViewModels
         public string ComunitieIds { get; set; }
         public int AnswerTypeId { get; set; }
         public string AnswerType { get; set; }
-        
         public string QuesetionTitle { get; set; }
-        public HttpPostedFileBase QPhotoFile { get; set; }
+        public List<HttpPostedFileBase> QPhotoFile { get; set; }
         public Nullable<bool> IsRequired { get; set; }
         public System.DateTime EndDate { get; set; }
         public Nullable<bool> IsRankeditorChoice { get; set; }
         public int LanguageId { get; set; }
-        public int OptionNum { get; set; }
+
         public string answerValues { get; set; }
         public List<HttpPostedFileBase> answerImgs { get; set; }
+
+     
 
         
 

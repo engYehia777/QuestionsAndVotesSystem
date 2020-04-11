@@ -198,7 +198,7 @@
     <Property Name="OptionNum" Type="Int32" Nullable="false" />
     <Property Name="AnswerValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PhotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="NumOfSelectedAnswers" Type="Int32" />
+    <Property Name="NumOfSelectedAnswers" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Question" Relationship="Self.FK_Question_Answer_Values_Questions" FromRole="Question_Answer_Values" ToRole="Questions" />
   </EntityType>
   <EntityType Name="Question">
@@ -213,13 +213,14 @@
     <Property Name="IsRequired" Type="Boolean" />
     <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsRankeditorChoice" Type="Boolean" />
-    <Property Name="Points" Type="Int32" />
-    <Property Name="TotalAnswers" Type="Int32" />
+    <Property Name="Points" Type="Int32" Nullable="false" />
+    <Property Name="TotalAnswers" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Answer_Types" Relationship="Self.FK_Questions_Answer_Types" FromRole="Questions" ToRole="Answer_Types" />
     <NavigationProperty Name="Post_Info" Relationship="Self.FK_Questions_Post_Info" FromRole="Questions" ToRole="Post_Info" />
     <NavigationProperty Name="Question_Answer_Values" Relationship="Self.FK_Question_Answer_Values_Questions" FromRole="Questions" ToRole="Question_Answer_Values" />
     <NavigationProperty Name="Questions_Comunities" Relationship="Self.FK_Questions_Comunities_Questions" FromRole="Questions" ToRole="Questions_Comunities" />
     <NavigationProperty Name="User_Answers" Relationship="Self.FK_User_Answers_Questions" FromRole="Questions" ToRole="User_Answers" />
+    <NavigationProperty Name="User_Likes" Relationship="QuestionsVotesModel.FK_User_Likes_Questions" FromRole="Question" ToRole="User_Likes" />
   </EntityType>
   <EntityType Name="Questions_Comunities">
     <Key>
@@ -373,7 +374,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="QuestionId" Type="Int32" Nullable="false" />
-    <Property Name="SelectedAnswerIds" Type="String" Nullable="false" />
+    <Property Name="SelectedAnswerIds" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Question" Relationship="Self.FK_User_Answers_Questions" FromRole="User_Answers" ToRole="Questions" />
     <NavigationProperty Name="AspNetUser" Relationship="QuestionsVotesModel.FK_User_Answers_AspNetUsers" FromRole="User_Answers" ToRole="AspNetUser" />
   </EntityType>
@@ -860,6 +861,18 @@
       <Parameter Name="UserID" Mode="In" Type="String" />
       <Parameter Name="PageName" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetByUserIdAndCommunityAndNotAnswered" ReturnType="Collection(QuestionsVotesModel.GetByUserIdAndCommunityAndNotAnswered_Result)">
+      <Parameter Name="UserId" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="User_Likes" EntityType="QuestionsVotesModel.User_Likes" />
+    <AssociationSet Name="FK_User_User_Likes" Association="QuestionsVotesModel.FK_User_User_Likes">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="User_Likes" EntitySet="User_Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Likes_Questions" Association="QuestionsVotesModel.FK_User_Likes_Questions">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="User_Likes" EntitySet="User_Likes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
     <Key>
@@ -930,8 +943,9 @@
     <Property Name="PhotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="BirthDate" Type="DateTime" Precision="3" />
     <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Points" Type="Int32" />
+    <Property Name="Points" Type="Int32" Nullable="false" />
     <Property Name="FullName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User_Likes" Relationship="QuestionsVotesModel.FK_User_User_Likes" FromRole="AspNetUser" ToRole="User_Likes" />
   </EntityType>
   <Association Name="FK_Roleprimission_AspNetRoles">
     <End Type="QuestionsVotesModel.AspNetRole" Role="AspNetRole" Multiplicity="1" />
@@ -1031,4 +1045,51 @@
     <Property Type="Boolean" Name="CanDelete" Nullable="false" />
     <Property Type="Boolean" Name="CanSearch" Nullable="false" />
   </ComplexType>
+  <ComplexType Name="GetByUserIdAndCommunityAndNotAnswered_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="PostId" Nullable="false" />
+    <Property Type="Int32" Name="AnswerTypeId" Nullable="false" />
+    <Property Type="String" Name="QuesetionTitle" Nullable="false" />
+    <Property Type="String" Name="PhotoUrl" Nullable="true" />
+    <Property Type="Boolean" Name="IsRequired" Nullable="true" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsRankeditorChoice" Nullable="true" />
+    <Property Type="Int32" Name="Points" Nullable="true" />
+    <Property Type="Int32" Name="TotalAnswers" Nullable="false" />
+    <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <EntityType Name="User_Likes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="QuestionsVotesModel.FK_User_User_Likes" FromRole="User_Likes" ToRole="AspNetUser" />
+    <NavigationProperty Name="Question" Relationship="QuestionsVotesModel.FK_User_Likes_Questions" FromRole="User_Likes" ToRole="Question" />
+  </EntityType>
+  <Association Name="FK_User_User_Likes">
+    <End Type="QuestionsVotesModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="QuestionsVotesModel.User_Likes" Role="User_Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Likes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Likes_Questions">
+    <End Type="QuestionsVotesModel.Question" Role="Question" Multiplicity="1" />
+    <End Type="QuestionsVotesModel.User_Likes" Role="User_Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Likes">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -23,6 +23,7 @@ namespace QuestionsAndVotesSystem.Api.Model
             this.Post_Info = new HashSet<Post_Info>();
             this.User_Answers = new HashSet<User_Answers>();
             this.User_Communities = new HashSet<User_Communities>();
+            this.User_Likes = new HashSet<User_Likes>();
         }
     
         public string Id { get; set; }
@@ -42,7 +43,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public string PhotoUrl { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string Gender { get; set; }
-        public Nullable<int> Points { get; set; }
+        public int Points { get; set; }
         public string FullName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -57,5 +58,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public virtual ICollection<User_Answers> User_Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Communities> User_Communities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Likes> User_Likes { get; set; }
     }
 }

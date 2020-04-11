@@ -52,6 +52,7 @@ namespace QuestionsAndVotesSystem.Api.Model
                 RolePage.CanSearch = EnterSelect != null ? EnterSelect.CanSearch : false;
                 RolePage.CanShow = EnterSelect != null ? EnterSelect.CanShow : false;
                 RolePage.CanUpdate = EnterSelect != null ? EnterSelect.CanUpdate : false;
+                RolePage.PageID = p.ID;
                 RolePage.Page = p;
                 RolePage.RoleId = mv.Role.Id;
                 PagesList.Add(RolePage);

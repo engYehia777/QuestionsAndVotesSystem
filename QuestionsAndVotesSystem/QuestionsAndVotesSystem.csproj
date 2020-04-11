@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44396</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -77,6 +77,26 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
@@ -144,9 +164,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -174,26 +191,14 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Twitter">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
@@ -252,6 +257,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Api\Model\Error.cs" />
+    <Compile Include="Api\Model\GetByUserIdAndCommunityAndNotAnswered_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Api\Model\Language.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -271,6 +279,7 @@
     <Compile Include="Api\Model\Page.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Api\Model\Poco\AnswerValuesPoco.cs" />
     <Compile Include="Api\Model\Poco\CommunityPoco.cs" />
     <Compile Include="Api\Model\Poco\PostPoco.cs" />
     <Compile Include="Api\Model\Post_Info.cs">
@@ -318,6 +327,9 @@
     <Compile Include="Api\Model\User_Communities.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Api\Model\User_Likes.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Api\Model\ViewModels\CommunityVM.cs" />
     <Compile Include="Api\Model\ViewModels\PostVM.cs" />
     <Compile Include="Api\Model\WebsiteInfo.cs">
@@ -351,7 +363,7 @@
     <Compile Include="Areas\Profile\Controllers\LanguageController.cs" />
     <Compile Include="Areas\Profile\Controllers\PageController.cs" />
     <Compile Include="Areas\Profile\Controllers\PostController.cs" />
-    <Compile Include="Areas\Profile\Controllers\PostManagerController.cs" />
+    <Compile Include="Areas\Profile\Controllers\BlogController.cs" />
     <Compile Include="Areas\Profile\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profile\Controllers\SecurityController.cs" />
     <Compile Include="Areas\Profile\Controllers\UserController.cs" />
@@ -7680,7 +7692,7 @@
     <Content Include="Areas\Profile\Views\Account\SendCode.cshtml" />
     <Content Include="Areas\Profile\Views\Account\VerifyCode.cshtml" />
     <Content Include="Areas\Profile\Views\Page\Index.cshtml" />
-    <Content Include="Areas\Profile\Views\PostManager\Index.cshtml" />
+    <Content Include="Areas\Profile\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Profile\Views\authorization\Menu.cshtml" />
     <Content Include="Areas\Profile\Views\Page\Edit.cshtml" />
     <Content Include="Areas\Profile\Views\Page\Create.cshtml" />
@@ -7709,6 +7721,7 @@
     <Content Include="Areas\Profile\Views\Post\Index.cshtml" />
     <Content Include="Areas\Profile\Views\Post\_Create.cshtml" />
     <Content Include="Areas\Profile\Views\Post\_Feed.cshtml" />
+    <Content Include="Areas\Profile\Views\Blog\_AnsweredQuestions.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7747,6 +7760,7 @@
     <Content Include="Areas\Profile\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\NotAuth.cshtml" />
     <Content Include="Views\Communites\AllCommunites.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Api\UploadedImages\" />
@@ -7784,7 +7798,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>25061</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:25061/</IISUrl>
+          <IISUrl>https://localhost:44396/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

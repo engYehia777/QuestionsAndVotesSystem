@@ -60,6 +60,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<User_Likes> User_Likes { get; set; }
     
         [DbFunction("DBEntities", "Split")]
         public virtual IQueryable<Split_Result> Split(string delimited, string delimiter)
@@ -95,6 +96,15 @@ namespace QuestionsAndVotesSystem.Api.Model
                 new ObjectParameter("PageName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserSecurityPages_Result>("UserSecurityPages", userIDParameter, pageNameParameter);
+        }
+    
+        public virtual ObjectResult<GetByUserIdAndCommunityAndNotAnswered_Result> GetByUserIdAndCommunityAndNotAnswered(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByUserIdAndCommunityAndNotAnswered_Result>("GetByUserIdAndCommunityAndNotAnswered", userIdParameter);
         }
     }
 }

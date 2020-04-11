@@ -76,7 +76,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="confirmDel" class="btn btn-danger">delete</button>
+                <button type="button" id="confirmDel" class="btn btn-danger" data-id="">delete</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -140,11 +140,17 @@
             }
 
         });*@
+
+            $(document).on("click", "#del", function () {
+                var myId = $(this).data('id');
+                $('#confirmDel').data('id', myId);
+            });
+
         $('#confirmDel').on('click', function () {
             debugger;
 
             let url = '@Url.Action("Delete", "Communities")';
-            let id = $('#del').attr("data-id");
+            let id = $(this).data('id');
             $.post(url, { id: id})
        .done(function (response, status, jqxhr) {
            $("#communityTbl button[data-id|='" + id + "']").parent().parent().remove();

@@ -16,7 +16,7 @@ namespace QuestionsAndVotesSystem.Controllers
         private PostApiController apiData = new PostApiController();
         [AllowAnonymous]
         public ActionResult Index()
-        {
+       {
             PostVM objVM = new PostVM();
             objVM.UserId = User.Identity.GetUserId();
             if (objVM.UserId == null || objVM.UserId == string.Empty)
@@ -29,6 +29,17 @@ namespace QuestionsAndVotesSystem.Controllers
             }
             
             //return RedirectToAction("Index", "Post", new { Area = "Profile" });
+            return View(objVM);
+        }
+
+
+        public ActionResult UserProfile()
+        {
+            PostVM objVM = new PostVM();
+            objVM.UserId = User.Identity.GetUserId();
+           
+            objVM.indexQuestions = apiData.GetAnsweredQuestions(objVM.UserId);
+            
             return View(objVM);
         }
 

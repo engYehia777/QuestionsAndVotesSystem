@@ -25,13 +25,13 @@
                             <span>@item.Description</span>
                         </div>
                         <div class="box-body">
-                            @if (item.userId == string.Empty || item.userId != Model.userId)
+                            @if (item.isFollowed)
                             {
-                                <button type="button" class="btn bg-olive margin follow" data-id="@item.Id">Follow</button>
+                                <button type="button" class="btn margin unfollow" data-id="@item.Id">Unfollow</button>
                             }
                             else
                             {
-                                <button type="button" class="btn margin unfollow" data-id="@item.Id">Unfollow</button>
+                                <button type="button" class="btn bg-olive margin follow" data-id="@item.Id">Follow</button>
                             }      
 
                             

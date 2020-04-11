@@ -55,15 +55,15 @@ namespace QuestionsAndVotesSystem
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+            appId: "519725052236252",
+               appSecret: "b5db8e403a9294f2b11a3457316b8854");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "532799852499-9vc28gjdijhme4qj47r3j9813vg92i12.apps.googleusercontent.com",
+                ClientSecret = "mxfv--SMULWo08UYWeRX6ARA"
+            });
         }
     }
 }

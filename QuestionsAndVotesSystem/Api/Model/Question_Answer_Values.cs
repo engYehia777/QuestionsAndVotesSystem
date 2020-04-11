@@ -19,7 +19,7 @@ namespace QuestionsAndVotesSystem.Api.Model
         public int OptionNum { get; set; }
         public string AnswerValue { get; set; }
         public string PhotoUrl { get; set; }
-        public Nullable<int> NumOfSelectedAnswers { get; set; }
+        public int NumOfSelectedAnswers { get; set; }
     
         public virtual Question Question { get; set; }
     }

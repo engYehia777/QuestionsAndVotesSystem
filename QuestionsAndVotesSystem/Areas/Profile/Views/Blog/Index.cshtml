@@ -1,0 +1,19 @@
+﻿@model  QuestionsAndVotesSystem.Api.Model.ViewModels.PostVM
+@{
+    ViewBag.Title = "Blog Index";
+    Layout = "~/Areas/Profile/Views/Shared/_ProfileLayout.cshtml";
+}
+
+@*<h2>here we show all answered questions and all answers then we blog it</h2>*@
+
+@if (Model.indexQuestions.Count == 0)
+{
+    <h2>No answered questions yet... </h2>
+}
+else
+{
+    <div id="postat" style="margin-top:67px">
+        @Html.Partial("~/Areas/Profile/Views/Blog/_AnsweredQuestions.cshtml", Model)
+    </div>
+}
+

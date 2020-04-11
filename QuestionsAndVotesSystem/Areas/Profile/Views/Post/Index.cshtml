@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Add to Community</label>
-                                @Html.DropDownList("Select Community", Model.communities, "All", new { @class = "form-control select2", multiple = "multiple", style = "width: 100%;" })
+                                @Html.DropDownList("Select Community", Model.communities, new { @class = "form-control select2", multiple = "multiple", style = "width: 100%;" })
 
                             </div>
                             <!-- /.form-group -->
@@ -111,32 +111,29 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <input type="file" id="QPhotoFile" name="QPhotoFile" />
+                            <input type="file" id="QPhotoFile" name="QPhotoFile" accept="image/*"  onchange="loadFile(event)" />
                             @*<input type="file" name="file" id="Qfile" />
                                 <label for="file"><i class="fa fa-fw fa-file-image-o"></i></label>*@
-                            <div>
-                                @*<img src="@Url.Content("")" width="150" height="150" />*@
+                            <div class="imgPreview">
+                                
                             </div>
                         </div>
                     </div>
                     @*answer types*@
                     <div id="answers">
-                        <div class="row answerItem">
+                        <div class="row firstItem">
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <input class="answer" type="checkbox" disabled="disabled">
                                     </span>
-                                    <input type="text" class="form-control js" placeholder="Option">
-                                    <span class="input-group-addon">
-                                        <button id="removeItem" type="button" class="btn btn-box-tool pull-right"><i class="fa fa-times"></i></button>
-                                    </span>
+                                    <input type="text" class="form-control js" placeholder="Option" data-id="">
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <input type="file" class="answerImg" />
+                                <input type="file" class="answerImg" data-id="" accept="image/*"  onchange="loadFile(event)"/>
 
-                                <div>
+                                <div class="imgPreview">
                                     @*<img src="@Url.Content("")" width="150" height="150" />*@
                                 </div>
                             </div>
@@ -147,16 +144,16 @@
                                     <span class="input-group-addon">
                                         <input class="answer" type="checkbox" disabled="disabled">
                                     </span>
-                                    <input type="text" class="form-control js" placeholder="Option">
+                                    <input type="text" class="form-control js" placeholder="Option" data-id="">
                                     <span class="input-group-addon">
                                         <button id="removeItem" type="button" class="btn btn-box-tool pull-right"><i class="fa fa-times"></i></button>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <input type="file" class="answerImg" />
+                                <input type="file" class="answerImg" data-id="" accept="image/*"  onchange="loadFile(event)" />
 
-                                <div>
+                                <div class="imgPreview">
                                     @*<img src="@Url.Content("")" width="150" height="150" />*@
                                 </div>
                             </div>
@@ -164,7 +161,7 @@
                     </div>
                     <button class="btn btn-default btn-sm" id="addOption" type="button">Add option</button>
                     <div class="box-footer">
-                        <button id="saveForm" class="btn btn-primary btn-lg" type="submit"> Add</button>
+                        <button id="saveForm" class="btn btn-primary btn-lg" type="submit" data-QID="" data-postID=""> Add</button>
 
                     </div>
 
@@ -175,6 +172,28 @@
         <!-- /.box -->
     </div>
 </div>
+@*answer item for clone*@
+<div class="row answerItem" style="display:none">
+    <div class="col-md-9">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <input class="answer" type="checkbox" disabled="disabled">
+            </span>
+            <input type="text" class="form-control js" placeholder="Option" data-id="">
+            <span class="input-group-addon">
+                <button id="removeItem" type="button" class="btn btn-box-tool pull-right"><i class="fa fa-times"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <input type="file" class="answerImg" data-id="" accept="image/*" onchange="loadFile(event)" />
+
+        <div class="imgPreview">
+            @*<img src="@Url.Content("")" width="150" height="150" />*@
+        </div>
+    </div>
+</div>
+
 
 <div id="postat">
 
@@ -197,6 +216,74 @@
     }
 
     <script>
+        var loadFile = function (event) {
+            debugger;
+           
+            var img = document.createElement("img");
+            var remove = document.createElement("span");
+            //var imgPreview = $('#imgPreview');
+            var imgPreview = $(event.path[0]).next();
+            imgPreview.empty();
+            var reader = new FileReader();
+            reader.onload = function () {
+               
+               
+                img.src = reader.result;
+                img.width = '100';
+                img.height = '100';
+                img.style.margin = '7px';
+                remove.innerHTML='<i class="glyphicon glyphicon-trash"></i>';
+                imgPreview.append(img);
+                imgPreview.append(remove);
+               // $('#removeImg').html('<i class="glyphicon glyphicon-trash"></i>')
+                
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+
+        $(document).on('click', '.imgPreview span', function () {
+            //$('#imgPreview span').click(function () {
+            $(this).parent().prev('input[type=file]').val('');
+            $(this).parent().empty();
+            
+        });
+
+        function PostValidation() {
+            var ComunitieIds = $('#Select_Community option:selected').map(function () {
+                return ($(this).val());
+            }).get().join(";");
+            if (ComunitieIds == null) {
+                AlertMsg('error', 'please select community ');
+                return false;
+            }
+
+            var AnswerType = $('#Select_Answer_type option:selected').val();
+            if (AnswerType == null || AnswerType =='') {
+                AlertMsg('error', 'please select answer type ');
+                return false;
+            }
+
+            var QuesetionTitle = $('#Quesetion').val();
+            if (QuesetionTitle == '') {
+                AlertMsg('error', 'please add question');
+                return false;
+            }
+
+            var endDate = $('#datepicker').val();
+            if (endDate == '') {
+                AlertMsg('error', 'please add end date');
+                return false;
+            }
+
+            var answerValues = $('#answers .js').map(function () {
+                return $(this).val();
+            }).get().join(";");
+            if (answerValues == null || answerValues == '') {
+                AlertMsg('error', 'please add at least one answer');
+                return false;
+            }
+            return true;
+        }
 
         $(document).ready(function () {
 
@@ -215,18 +302,15 @@
                 //$("#answers").append(cloneItm);
 
                 $(".answerItem").clone().appendTo('#answers');
-                $('#answers .row').first().removeClass('answerItem');
-                //$('#answers .row').last().find('input[type=text]')
+                $('#answers .row').last().removeClass('answerItem').show();
+                
 
             });
 
             // remove answer option
             $(document).on('click', '#removeItem', function () {
-
-                if ($('#removeItem').closest('.row').hasClass('answerItem')) {
-                    return false;
-                }
-                $('#removeItem').closest('.row').remove();
+               
+                $(this).closest('.row').remove();
             });
 
             //Date picker
@@ -235,14 +319,22 @@
                 format: 'dd/mm/yyyy'
             })
 
+           
 
             // submit form
             $('#postForm').submit(function (e) {
                 e.preventDefault();
-
                 debugger;
+                if (PostValidation()) {
+
                 var data = new FormData();
 
+                var questionId= $('#saveForm').attr('data-QID');
+                var PostId = $('#saveForm').attr('data-postID');
+                data.append("questionId", questionId);
+                data.append("PostId", PostId);
+                //fill != null and image preview not empty => creat
+                //fill = null and image preview not empty => update
                 var QPhoto = $("#QPhotoFile").get(0).files;
                 //// Add the question image to the form data collection
                 if (QPhoto.length > 0) data.append("QPhotoFile", QPhoto[0]);
@@ -252,7 +344,7 @@
                 $('#Select_Community option:selected').each(function (element) {
                     debugger;
 
-                    if ($(this).val() === '') {
+                    if ($(this).val() == '16') {
                         falg = 0;
                         return false;
                     }
@@ -265,18 +357,15 @@
                     }).get().join(";");
 
                     data.append("ComunitieIds", ComunitieIds);
-                } else {
-                    data.append("ComunitieIds", '0');
+                }
+                else {
+                    data.append("ComunitieIds", '16');
                 }
 
                 var AnswerType = $('#Select_Answer_type option:selected').val();
                 data.append("AnswerType", AnswerType);
 
                 var QuesetionTitle = $('#Quesetion').val();
-                if (QuesetionTitle == '') {
-                    AlertMsg('error', 'please add question');
-                    return false;
-                }
                 data.append("QuesetionTitle", QuesetionTitle);
 
                 var endDate = $('#datepicker').val();
@@ -324,11 +413,15 @@
                     }
 
                 })
+                }
             });
 
 
             //postEdit
-            $('#postEdit').click(function () {
+            $(document).on('click', '#postEdit', function () {
+
+            
+            //$('#postEdit').click(function () {
                 debugger;
                 var questionId = $(this).attr("data-id");
 
@@ -337,9 +430,47 @@
                     url: "/Profile/Post/Editpost",
                     data: { id: questionId },
 
-                    success: function (response) {
+                    success: function (data) {
                         debugger;
-                        console.log(response);
+                        if (data != null) {
+                            
+                            $("#Select_Community").val([]).trigger('change');
+                            $("#Select_Community").val(data.communityIDs).trigger('change');
+
+                            $("#Select_Answer_type").val('').trigger('change');
+                            $("#Select_Answer_type").val(data.answerType).trigger('change');
+
+                            $('#chkRequired').prop('checked', data.IsRequired);
+                            $('#chkEditorChoice').prop('checked', data.IsRankeditorChoice);
+
+                            var date = new Date(parseInt(data.endDate.substr(6)));
+                            var endDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+                            $('#datepicker').val(endDate);
+
+                            $('#Quesetion').val(data.QuesetionTitle);
+
+                            // fill answer options
+                            // still working on update photos
+                            var optionsElements = $('#answers .js');
+                            data.answerValues.map(function (item, i) {
+                                optionsElements.each(function (index) {
+                                    if (i == index) {
+                                        $(this).val(item.AnswerValue);
+                                        $(this).attr('data-id', item.Id)
+                                    }
+                                });
+                            });
+
+
+                            $('#saveForm').attr('data-QID', data.questionId);
+                            $('#saveForm').attr('data-postID', data.postId);
+                            
+                            
+                            
+                            
+                           
+                        }
+                        
 
                     },
                     error: function () {
@@ -351,6 +482,8 @@
 
 
             });
+
+           
 
 
         });

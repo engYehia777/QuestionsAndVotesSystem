@@ -77,7 +77,7 @@
     <Property Name="PhotoUrl" Type="nvarchar(max)" />
     <Property Name="BirthDate" Type="datetime" />
     <Property Name="Gender" Type="nchar" MaxLength="10" />
-    <Property Name="Points" Type="int" />
+    <Property Name="Points" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Communities">
     <Key>
@@ -248,7 +248,7 @@
     <Property Name="OptionNum" Type="int" Nullable="false" />
     <Property Name="AnswerValue" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PhotoUrl" Type="nvarchar(max)" />
-    <Property Name="NumOfSelectedAnswers" Type="int" />
+    <Property Name="NumOfSelectedAnswers" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Questions">
     <Key>
@@ -262,8 +262,8 @@
     <Property Name="IsRequired" Type="bit" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
     <Property Name="IsRankeditorChoice" Type="bit" />
-    <Property Name="Points" Type="int" />
-    <Property Name="TotalAnswers" Type="int" />
+    <Property Name="Points" Type="int" Nullable="false" />
+    <Property Name="TotalAnswers" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Questions_Comunities">
     <Key>
@@ -422,6 +422,14 @@
     <Property Name="CommunitieId" Type="int" Nullable="false" />
     <Property Name="FollowingDate" Type="datetime" />
     <Property Name="Sort" Type="int" />
+  </EntityType>
+  <EntityType Name="User_Likes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="QuestionId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="WebsiteInfo">
     <Key>
@@ -797,6 +805,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_Likes_Questions">
+    <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+    <End Role="User_Likes" Type="Self.User_Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Likes">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_User_Likes">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_Likes" Type="Self.User_Likes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_Likes">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_WebsiteInfoEmailSetting_WebsiteInfo">
     <End Role="WebsiteInfo" Type="Self.WebsiteInfo" Multiplicity="0..1" />
     <End Role="WebsiteInfoEmailSetting" Type="Self.WebsiteInfoEmailSetting" Multiplicity="*" />
@@ -845,6 +877,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetByUserIdAndCommunityAndNotAnswered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="delimited" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="delimiter" Type="nvarchar" Mode="In" />
@@ -894,6 +929,7 @@
     <EntitySet Name="UploadFiles" EntityType="Self.UploadFiles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Answers" EntityType="Self.User_Answers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_Communities" EntityType="Self.User_Communities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Likes" EntityType="Self.User_Likes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebsiteInfo" EntityType="Self.WebsiteInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebsiteInfoEmailSetting" EntityType="Self.WebsiteInfoEmailSetting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WebsiteInfoEmailSettingType" EntityType="Self.WebsiteInfoEmailSettingType" Schema="dbo" store:Type="Tables" />
@@ -986,6 +1022,14 @@
     <AssociationSet Name="FK_User_Communities_Communities" Association="Self.FK_User_Communities_Communities">
       <End Role="Communities" EntitySet="Communities" />
       <End Role="User_Communities" EntitySet="User_Communities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Likes_Questions" Association="Self.FK_User_Likes_Questions">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="User_Likes" EntitySet="User_Likes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User_Likes" Association="Self.FK_User_User_Likes">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_Likes" EntitySet="User_Likes" />
     </AssociationSet>
     <AssociationSet Name="FK_WebsiteInfoEmailSetting_WebsiteInfo" Association="Self.FK_WebsiteInfoEmailSetting_WebsiteInfo">
       <End Role="WebsiteInfo" EntitySet="WebsiteInfo" />

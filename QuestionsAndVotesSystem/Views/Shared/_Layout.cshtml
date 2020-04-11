@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-  
-    
+
+
     @Styles.Render("~/Content/Profilecss")
     @Styles.Render("~/Content/DataTableCss")
     @Styles.Render("~/Content/Toastr")
 
-  
+
 
 </head>
 <body>
@@ -30,7 +30,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Communities", "AllCommunites", "Communites")</li>
-                   
+
                 </ul>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav navbar-right">
@@ -38,10 +38,19 @@
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
                                 <!-- The user image in the navbar-->
-                                <img src="~/Areas/Profile/dist/img/user1-128x128.jpg" class="user-image" alt="User Image">
+                                    <img src="~/Areas/Profile/dist/img/user1-128x128.jpg" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">@HttpContext.Current.User.Identity.Name</span>
+                                    <span class="hidden-xs">@HttpContext.Current.User.Identity.Name</span>
+                                }
+                                else
+                                {
+                                    <img src="~/Areas/Profile/dist/img/avatar5.png" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">Not syncing</span>
+                                }
+
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -60,10 +69,10 @@
                                             <a href="#">Followers</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Profile</a>
+                                            <a href="/Home/UserProfile">Profile</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a> 
+                                            <a href="#">Friends</a>
                                         </div>
                                     </div>
                                     <!-- /.row -->
@@ -72,16 +81,29 @@
                                 <li class="user-footer">
                                     <div class="row">
                                         <div class="col-md-6 pull-left">
-                                          
+
                                             <a class="btn btn-default btn-flat" href="/Profile/Home">Dashboard</a>
                                         </div>
                                         <div class="col-md-6 pull-right">
-                                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
                                             {
+                                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                {
 
-                                                @Html.AntiForgeryToken()
-                                                <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                                                    @Html.AntiForgeryToken()
+                                                    <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
 
+                                                }
+                                            }
+                                            else
+                                            {
+                                                using (Html.BeginForm("Login", "Account", FormMethod.Get, new { id = "loginForm" }))
+                                                {
+
+                                                    @Html.AntiForgeryToken()
+                                                    <a class="btn btn-default btn-flat" href="javascript:document.getElementById('loginForm').submit()">Login</a>
+
+                                                }
                                             }
 
                                         </div>
@@ -111,27 +133,27 @@
 
     <script type="text/javascript">
 
-            toastr.options = {
-                "closeButton": true,
-                "positionClass": "toast-bottom-right",
-                "timeOut": "4000"
-            };
-            function AlertMsg(type, msg) {
-                if (type == 'success') {
-                    toastr.success(msg)
-                }
-                else if (type == 'info') {
-                    toastr.info(msg)
-                }
-                else if (type == 'warning') {
-                    toastr.warning(msg)
-                }
-                else if (type == 'error') {
-                    toastr.error(msg)
-                }
-
-
+        toastr.options = {
+            "closeButton": true,
+            "positionClass": "toast-bottom-right",
+            "timeOut": "4000"
+        };
+        function AlertMsg(type, msg) {
+            if (type == 'success') {
+                toastr.success(msg)
             }
+            else if (type == 'info') {
+                toastr.info(msg)
+            }
+            else if (type == 'warning') {
+                toastr.warning(msg)
+            }
+            else if (type == 'error') {
+                toastr.error(msg)
+            }
+
+
+        }
 
 
     </script>

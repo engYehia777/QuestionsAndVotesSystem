@@ -22,7 +22,7 @@ namespace QuestionsAndVotesSystem.Api.Controller
         // community List 
         public IEnumerable<CommunityPoco> GetCommunityList(string language)
         {
-            return db.Communities.ToList().Select(c => new CommunityPoco(c, language));
+            return db.Communities.ToList().Select(c => new CommunityPoco(c, language)).OrderBy(c => c.Name);
             //return (language.Equals("ar-EG")) ? db.Communities.ToList().Select(c => new CommunityPoco() { Id = c.Id, Name = c.NameAr }).ToList() :
             //       db.Communities.ToList().Select(c => new CommunityPoco() { Id = c.Id, Name = c.NameEn }).ToList();
         }
@@ -37,37 +37,38 @@ namespace QuestionsAndVotesSystem.Api.Controller
         }
 
         // community List for spesific user 
-        public IEnumerable<CommunityPoco> GetCommunityListForUser(string language)
+        public IEnumerable<CommunityPoco> GetCommunityListForUser(string UID, string language)
         {
-            Community obj;
-            List<CommunityPoco> ListOFComm = new List<CommunityPoco>();
-            var result = from c in db.Communities
-                         join u in db.User_Communities on c.Id equals u.CommunitieId into cu
-                         from communityAndUsers in cu.DefaultIfEmpty()
-                         select new
-                         {
-                             Id = c.Id,
-                             NameAr = c.NameAr,
-                             NameEn = c.NameEn,
-                             DescriptionAr = c.DescriptionAr,
-                             DescriptionEn = c.DescriptionEn,
-                             User_Communities = c.User_Communities
-                         };
-            if (result != null)
-            {
-                foreach (var item in result)
-                {
-                    obj = new Community();
-                    obj.Id = item.Id;
-                    obj.NameAr = item.NameAr;
-                    obj.NameEn = item.NameEn;
-                    obj.DescriptionAr = item.DescriptionAr;
-                    obj.DescriptionEn = item.DescriptionEn;
-                    obj.User_Communities = item.User_Communities;
-                    ListOFComm.Add(new CommunityPoco(obj, language));
-                }
-            }
-            return ListOFComm.OrderBy(c => c.Name);
+            return  db.Communities.ToList().Select(c => new CommunityPoco(c, UID, language)); 
+            //Community obj;
+            //List<CommunityPoco> ListOFComm = new List<CommunityPoco>();
+            //var result = from c in db.Communities
+            //             join u in db.User_Communities on c.Id equals u.CommunitieId into cu
+            //             from communityAndUsers in cu.DefaultIfEmpty()
+            //             select new
+            //             {
+            //                 Id = c.Id,
+            //                 NameAr = c.NameAr,
+            //                 NameEn = c.NameEn,
+            //                 DescriptionAr = c.DescriptionAr,
+            //                 DescriptionEn = c.DescriptionEn,
+            //                 userId = communityAndUsers.UserId
+            //             };
+            //if (result != null)
+            //{
+            //    foreach (var item in result)
+            //    {
+            //        obj = new Community();
+            //        obj.Id = item.Id;
+            //        obj.NameAr = item.NameAr;
+            //        obj.NameEn = item.NameEn;
+            //        obj.DescriptionAr = item.DescriptionAr;
+            //        obj.DescriptionEn = item.DescriptionEn;
+
+                             //        ListOFComm.Add(new CommunityPoco(obj,item.userId , language));
+                             //    }
+                             //}
+                             //return ListOFComm.OrderBy(c => c.Name);
         }
 
         // PUT: api/CommunitiesApi/5
@@ -138,18 +139,29 @@ namespace QuestionsAndVotesSystem.Api.Controller
         public bool DeleteCommunity(int id)
         {
             Community community = db.Communities.Find(id);
+           List<User_Communities> uc = db.User_Communities.Where(x => x.CommunitieId.Equals(id)).ToList(); 
             if (community == null)
             {
                 return false;
             }
 
             db.Communities.Remove(community);
-            if (db.SaveChanges() > 0)
+            db.User_Communities.RemoveRange(uc);
+            try
             {
-                return true;
-            }
+                db.SaveChanges();
 
-            return false;
+                return true;
+                
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                string err = e.Message;
+                string innerEx = e.InnerException.ToString();
+                return false;
+            }
+            
+
         }
 
         protected override void Dispose(bool disposing)
@@ -173,7 +185,7 @@ namespace QuestionsAndVotesSystem.Api.Controller
             UC.CommunitieId = community.Id;
             UC.UserId = community.userId;
             UC.FollowingDate = DateTime.Now;
-            var cs = db.User_Communities.OrderByDescending(c => c.Sort).FirstOrDefault().Sort;
+            var cs = db.User_Communities.OrderByDescending(c => c.Sort).FirstOrDefault(u => u.UserId == community.userId).Sort;
             if (cs == null)
             {
                 UC.Sort = 1;
@@ -198,7 +210,7 @@ namespace QuestionsAndVotesSystem.Api.Controller
         {
             User_Communities UC = new User_Communities();
 
-            var cs = db.User_Communities.FirstOrDefault(uc => uc.CommunitieId == community.Id && uc.UserId == community.userId);
+            var cs = db.User_Communities.Single(uc => uc.CommunitieId == community.Id && uc.UserId == community.userId);
             db.User_Communities.Remove(cs);
             if (db.SaveChanges() > 0)
             {
